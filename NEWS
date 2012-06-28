@@ -18,3 +18,8 @@ Changed id, count, translation to QueryID, QueryCount, and QueryTranslation so t
 Created Medline class to process output for E-fetch from PubMed database.
 
 Usage disclaimer added.
+_______________________________________________________________________
+
+Version 2.0.2
+
+Added data frame method MedlineDataframe

@@ -1,5 +1,5 @@
 exportClasses(EUtilsSummary,Medline)
-export(Medline,EUtilsSummary,EUtilsQuery,EUtilsGet,QueryTranslation,QueryId,QueryCount)
+export(MedlineDataframe,Medline,EUtilsSummary,EUtilsQuery,EUtilsGet,QueryTranslation,QueryId,QueryCount)
 exportMethods(Query, PMID, Year, Month, Day, Author, ISSN, 
 Title, ArticleTitle, ELocationID, AbstractText, Affiliation, 
 Language, PublicationType, MedlineTA, NlmUniqueID, ISSNLinking, 
