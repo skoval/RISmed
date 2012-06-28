@@ -1,0 +1,20 @@
+Version 2.0
+------------------------------------------------------------------------------
+
+Because of the limitations of calling through hubmed.org, RISmed now downloads
+content directly from NCBI. This has required major revisions to the package including the 
+dropping of the Reference class and export functions. 
+
+The name of the package will be retained but its design will focus on getting NCBI content for analysis not for reference management.
+
+The current version has the main advantages of no longer having a reference limit to downloaded records. It also can access any valid Entrez database. It still sucks because there is not much processing of content so 2.0 should be considered an alpha version.
+
+------------------------------------------------------------------------------
+
+Version 2.0.1
+
+Changed id, count, translation to QueryID, QueryCount, and QueryTranslation so that there would be no naming conflict with the plyr package.
+
+Created Medline class to process output for E-fetch from PubMed database.
+
+Usage disclaimer added.

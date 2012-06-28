@@ -1,0 +1,10 @@
+exportClasses(EUtilsSummary,Medline)
+export(Medline,EUtilsSummary,EUtilsQuery,EUtilsGet,QueryTranslation,QueryId,QueryCount)
+exportMethods(Query, PMID, Year, Month, Day, Author, ISSN, 
+Title, ArticleTitle, ELocationID, AbstractText, Affiliation, 
+Language, PublicationType, MedlineTA, NlmUniqueID, ISSNLinking, 
+Hour, Minute, PublicationStatus, ArticleId, Volume, 
+Issue, ISOAbbreviation, MedlinePgn, CopyrightInformation, 
+Country, DescriptorName, QualifierName, GrantID, Acronym, 
+Agency, RegistryNumber, RefSource, CollectiveName)
+exportMethods(print,show,summary)
