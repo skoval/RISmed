@@ -14,8 +14,15 @@ EUtilsSummary <- function(query,type="esearch",db="pubmed",url=NULL,encoding="un
 		url <- EUtilsQuery(query,type,db,...)
 	}
 
-	res <- ParseTags(readLines(url,warn=FALSE,encoding=encoding))
-	if(res$Count==0) res$Id <- character(0)
+	lines <- readLines(url,warn=FALSE,encoding=encoding)
+	res <- ParseTags(lines)
+	
+	EMPTYCHECK <- length(grep("<eSearchResult><Count>0<\\/Count>", lines))!=0
+	
+	if(EMPTYCHECK){
+			res$Id <- character(0)
+			res$Count <- 0
+		}
 	
 	new("EUtilsSummary",
 		count = res$Count,

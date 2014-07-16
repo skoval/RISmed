@@ -4,12 +4,12 @@
 \title{Example of results from \code{EUtilsGet}}
 
 \description{
-First ten records of query of NCBI PubMed for "myeloma[ti]" in the past year (at the time of this writing) as a Medline object.
+First five records of query of NCBI PubMed for "myeloma[MeSh]" in the past year (at the time of this writing) as a Medline object.
 }
 
 \usage{myeloma}
 
-\format{A list object with 10 PubMed article records.}
+\format{A list object with five PubMed article records.}
 
 \source{PubMed database of the US National Library of Medicine}
 

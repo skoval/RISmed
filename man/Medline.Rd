@@ -20,7 +20,7 @@ Objects can be created by calls of the form \code{new("Medline", ...)}.
 \item{\code{Year}:}{}                
 \item{\code{Month}:}{}               
 \item{\code{Day}:}{}                 
-\item{\code{Author}:}{list of data frames giving \code{LastName}, \code{ForeName}, \code{Initials}, and \code{order} of authors by PubMed article.}              
+\item{\code{Author}:}{ list of data frames giving \code{LastName}, \code{ForeName}, \code{Initials}, and \code{order} of authors by PubMed article.}              
 \item{\code{ISSN}:}{}                
 \item{\code{Title}:}{}               
 \item{\code{ArticleTitle}:}{}        
@@ -42,15 +42,14 @@ Objects can be created by calls of the form \code{new("Medline", ...)}.
 \item{\code{MedlinePgn}:}{}          
 \item{\code{CopyrightInformation}:}{}
 \item{\code{Country}:}{}             
-\item{\code{DescriptorName}:}{}      
-\item{\code{QualifierName}:}{}       
 \item{\code{GrantID}:}{}             
 \item{\code{Acronym}:}{}             
 \item{\code{Agency}:}{}              
 \item{\code{RegistryNumber}:}{}      
 \item{\code{RefSource}:}{}           
 \item{\code{CollectiveName}:}{}   
-  }
+\item{\code{Mesh}:}{ list of data frames giving \code{Heading} and \code{Type} of MeSH term or \code{NA} if no terms are in MEDLINE record}
+ }
 }
 \section{Methods}{
   In addition to \code{print} and \code{show} methods, each slot of the \code{Medline} class has a corresponding extractor of the same name.
@@ -84,14 +83,13 @@ Objects can be created by calls of the form \code{new("Medline", ...)}.
 \item{MedlinePgn}{\code{signature(object = "Medline")}: ...}          
 \item{CopyrightInformation}{\code{signature(object = "Medline")}: ...}
 \item{Country}{\code{signature(object = "Medline")}: ...}             
-\item{DescriptorName}{\code{signature(object = "Medline")}: ...}      
-\item{QualifierName}{\code{signature(object = "Medline")}: ...}       
 \item{GrantID}{\code{signature(object = "Medline")}: ...}             
 \item{Acronym}{\code{signature(object = "Medline")}: ...}             
 \item{Agency}{\code{signature(object = "Medline")}: ...}              
 \item{RegistryNumber}{\code{signature(object = "Medline")}: ...}      
 \item{RefSource}{\code{signature(object = "Medline")}: ...}           
-\item{CollectiveName}{\code{signature(object = "Medline")}: ...}   
+\item{CollectiveName}{\code{signature(object = "Medline")}: ...}
+\item{Mesh}{\code{signature(object = "Medline")}: ...}   
   }
 }
 

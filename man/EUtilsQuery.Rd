@@ -53,10 +53,9 @@ Query help:
 
 \url{http://www.ncbi.nlm.nih.gov/books/NBK3827/}
 
-EUtils ESearch
+MEDLINE/PubMed Field Descriptions
 
-\url{http://eutils.ncbi.nlm.nih.gov/entrez/query/static/esearch_help.html}
-
+\url{http://www.nlm.nih.gov/bsd/mms/medlineelements.html}
 }
 
 \examples{

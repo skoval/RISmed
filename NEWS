@@ -18,8 +18,21 @@ Changed id, count, translation to QueryID, QueryCount, and QueryTranslation so t
 Created Medline class to process output for E-fetch from PubMed database.
 
 Usage disclaimer added.
-_______________________________________________________________________
 
-Version 2.0.2
+-------------------------------------------------------------------------------
 
-Added data frame method MedlineDataframe
+Version 2.1.0
+
+Corrected web link; Added MeSH Terms for MEDLINE object
+
+-------------------------------------------------------------------------------
+
+Version 2.1.1
+
+Revised fields to accept bracketed (foreign-language) titles.
+
+-------------------------------------------------------------------------------
+
+Version 2.1.2
+
+Fixed bug with author field for cases with missing forename/middle name; Fixed error message for queries with no result and instead return EUtilsSummary object with "0" record count.

@@ -1,4 +1,5 @@
-\name{Day-methods}
+\name{Day-methods
+}
 \docType{methods}
 \alias{Day-methods}
 \alias{Day,Medline-method}
