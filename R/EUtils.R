@@ -130,7 +130,8 @@ EUtilsSubGet <- function(ids, type="efetch", db="pubmed"){
 	
 	ArticleList <- mapply(GroupArticle, start = ArticleStart(res),
                               end = ArticleEnd(res),
-                              MoreArgs = list(.obj = res), SIMPLIFY = FALSE)
+                              MoreArgs = list(.obj = res), 
+                              SIMPLIFY = FALSE)
 
 										
 	ParseEUtilsFetch <- lapply(ArticleList, function(x){

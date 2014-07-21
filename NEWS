@@ -36,3 +36,9 @@ Revised fields to accept bracketed (foreign-language) titles.
 Version 2.1.2
 
 Fixed bug with author field for cases with missing forename/middle name; Fixed error message for queries with no result and instead return EUtilsSummary object with "0" record count.
+
+-------------------------------------------------------------------------------
+
+Version 2.1.3
+
+Corrected problem with extraction of publication date.
