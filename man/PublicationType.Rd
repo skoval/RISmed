@@ -16,7 +16,7 @@ PublicationType(object)
   \item{object}{instance of class \code{Medline}}
 }
 
-\value{vector}
+\value{list}
 
 \seealso{\code{\link{Medline}}}
 

@@ -123,7 +123,7 @@ setClass("Medline",
 			AbstractText= "character",
 			Affiliation= "character",
 			Language= "character",
-			PublicationType= "character",
+			PublicationType= "list",
 			MedlineTA= "character",
 			NlmUniqueID= "character",
 			ISSNLinking= "character",
@@ -168,7 +168,7 @@ Medline <- function(object, query = character(0)){
 	AbstractText <- sapply(object, function(x) x["AbstractText"],USE.NAMES=FALSE)
 	Affiliation <- sapply(object, function(x) x["Affiliation"],USE.NAMES=FALSE)
 	Language <- sapply(object, function(x) x["Language"],USE.NAMES=FALSE)
-	PublicationType <- sapply(object, function(x) x["PublicationType"],USE.NAMES=FALSE)
+	PublicationType <- lapply(object, function(x) x[names(x) == "PublicationType"])
 	MedlineTA <- sapply(object, function(x) x["MedlineTA"],USE.NAMES=FALSE)
 	NlmUniqueID <- sapply(object, function(x) x["NlmUniqueID"],USE.NAMES=FALSE)
 	ISSNLinking <- sapply(object, function(x) x["ISSNLinking"],USE.NAMES=FALSE)
@@ -201,7 +201,7 @@ Medline <- function(object, query = character(0)){
 	AbstractText <- as.character(AbstractText)
 	Affiliation <- as.character(Affiliation)
 	Language <- as.character(Language)
-	PublicationType <- as.character(PublicationType)
+	PublicationType <- PublicationType
 	MedlineTA <- as.character(MedlineTA)
 	NlmUniqueID <- as.character(NlmUniqueID)
 	ISSNLinking <- as.character(ISSNLinking)

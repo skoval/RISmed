@@ -42,3 +42,9 @@ Fixed bug with author field for cases with missing forename/middle name; Fixed e
 Version 2.1.3
 
 Corrected problem with extraction of publication date.
+
+-------------------------------------------------------------------------------
+
+Version 2.1.4
+
+Changed Publication Type to list to allow for multiple types to be extracted from Pubmed records.
