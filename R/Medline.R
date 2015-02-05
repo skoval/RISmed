@@ -305,4 +305,5 @@ setMethod("RegistryNumber","Medline",function(object) object@RegistryNumber)
 setMethod("RefSource","Medline",function(object) object@RefSource)                      
 setMethod("CollectiveName","Medline",function(object) object@CollectiveName)            
 setMethod("Mesh","Medline",function(object) object@Mesh)
+setMethod("Cited", "Medline", cited_function)
 

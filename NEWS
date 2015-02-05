@@ -48,3 +48,11 @@ Corrected problem with extraction of publication date.
 Version 2.1.4
 
 Changed Publication Type to list to allow for multiple types to be extracted from Pubmed records.
+
+-------------------------------------------------------------------------------
+
+Version 2.1.5
+
+Add method Cited for Medline and EUtilsSummary classes.
+
+

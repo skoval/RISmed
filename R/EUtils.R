@@ -101,7 +101,7 @@ EUtilsGet <- function(x, type="efetch", db="pubmed"){
 
 	if(class(x)[1]=="EUtilsSummary"){
 		query <- x@querytranslation
-		x <- x@id
+		x <- x@PMID
 	}
 	else{
 		query <- ""

@@ -13,10 +13,11 @@ Objects can be created by calls of the form \code{new("EUtilsSummary", ...)}.
 }
 \section{Slots}{
   \describe{
+    \item{\code{db}:}{Name of database}
     \item{\code{count}:}{total ids}
     \item{\code{retmax}:}{limit on number of records to return}
     \item{\code{retstart}:}{numeric indicating where return records start}
-    \item{\code{id}:}{character vector of matching ids}
+    \item{\code{PMID}:}{character vector of matching ids}
     \item{\code{querytranslation}:}{character of NCBI translation of query}
   }
 }

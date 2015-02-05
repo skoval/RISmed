@@ -1,9 +1,10 @@
 setClass("EUtilsSummary",
 	representation(
+	    db = "character",
 		count = "numeric",
 		retmax = "numeric",
 		retstart = "numeric",
-		id = "character",
+		PMID = "character",
 		querytranslation = "character"
 	)
 )
@@ -25,10 +26,11 @@ EUtilsSummary <- function(query,type="esearch",db="pubmed",url=NULL,encoding="un
 		}
 	
 	new("EUtilsSummary",
+		db = db,
 		count = res$Count,
 		retstart = res$RetStart,
 		retmax = res$RetMax,
-		id = res$Id,
+		PMID = res$Id,
 		querytranslation = res$QueryTranslation
 		)
 }
@@ -41,11 +43,20 @@ setMethod("summary","EUtilsSummary",function(object,...){
 			cat(object@querytranslation,"\n\n")
 			cat("Result count: ",object@count)
 			
-			invisible(object@id)
+			invisible(object@PMID)
 			
 })
 
 # GENERICS
 setMethod("QueryCount","EUtilsSummary",function(object) object@count)
-setMethod("QueryId","EUtilsSummary",function(object) object@id)
+setMethod("QueryId","EUtilsSummary",function(object) object@PMID)
 setMethod("QueryTranslation","EUtilsSummary",function(object) object@querytranslation)
+setMethod("Cited", "EUtilsSummary", cited_function)
+
+
+
+
+
+
+
+
