@@ -1,6 +1,6 @@
 cited_function <- function(object){
 
-if(class(object)[1] == "EUtilsSummary" & object@db != "pubmed")
+if(class(object)[1] == "EUtilsSummary" && object@db != "pubmed")
 	stop("Cited is only available for queries of the Pubmed database")
 
 f <- function(id){
