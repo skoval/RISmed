@@ -157,7 +157,7 @@ Medline <- function(object, query = character(0)){
 
 	Year <- mapply(FUN, index = TagIndex, obj = object, MoreArgs = list(field = "Year"))
 	Month <- mapply(FUN, index = TagIndex, obj = object, MoreArgs = list(field = "Month"))
-	Day <- mapply(FUN, index = TagIndex, obj = object, MoreArgs = list(field = "Month"))
+	Day <- mapply(FUN, index = TagIndex, obj = object, MoreArgs = list(field = "Day"))
 	Minute <- mapply(FUN, index = TagIndex, obj = object, MoreArgs = list(field = "Minute"))
 	Hour <- mapply(FUN, index = TagIndex, obj = object, MoreArgs = list(field = "Hour"))
 	
