@@ -112,6 +112,7 @@ EUtilsGet <- function(x, type="efetch", db="pubmed"){
 	Result <- unlist(Result, recursive=FALSE)
 
 	if(type=="efetch"&db=="pubmed"){
+		
 		Result <- Medline(Result, query)
 	}
 			
@@ -125,7 +126,16 @@ EUtilsSubGet <- function(ids, type="efetch", db="pubmed"){
 	IDStr <- collapse("id=",paste(ids,collapse=","))
 	EUtilsFetch <- collapse(FetchURL,IDStr)	
 	res <- readLines(collapse(EUtilsFetch,"&retmode=xml"),warn=FALSE,encoding="UTF-8")
-
+	
+	pubstatus <- c(
+		"received", 
+		"accepted",
+		"epublish",
+		"ppublish",
+		"pmc",
+		"pubmed"
+	)
+	
 	if(db=="pubmed"){
 	
 	ArticleList <- mapply(GroupArticle, start = ArticleStart(res),
@@ -135,6 +145,20 @@ EUtilsSubGet <- function(ids, type="efetch", db="pubmed"){
 
 										
 	ParseEUtilsFetch <- lapply(ArticleList, function(x){
+		for(i in pubstatus){
+			if(any(grepl("PubStatus", x) & grepl(i, x))){
+				index <- which(grepl("PubStatus", x) & grepl(i, x))
+				x[index + 1:5] <- gsub("(Year|Month|Day|Hour|Minute)",paste(c("\\1",First_Upper(i)),collapse = ""), x[index + 1:5])
+			}
+		}	
+
+		if(any(grepl("AbstractText", x) & grepl("Label", x))){
+			index <- which(grepl("AbstractText", x) & grepl("Label", x))
+			labels <- sub("(.*Label.*[[:punct:]])([A-Z].*[A-Z])([[:punct:]].*Nlm.*)","\\2",x[index])
+			for(i in 1:length(labels))
+				x[index[i]] <- sub("(.*>)(.*>)",paste(c("\\1",labels[i],": \\2"), collapse = ""),x[index[i]])
+		}
+		
 		val <- GetValues(x[LinesWithValues(x)])
 		names(val) <- GetFields(x[LinesWithValues(x)])
 	val
@@ -150,6 +174,7 @@ EUtilsSubGet <- function(ids, type="efetch", db="pubmed"){
 ParseEUtilsFetch
 }
 
+First_Upper <- function(x) paste(toupper(substr(x,1,1)),substr(x,2,nchar(x)),collapse = "", sep = "")
 
 LinesWithValues <- function(.obj){
 	grep(">(\\[?[a-zA-Z]|[0-9]).*<",.obj)

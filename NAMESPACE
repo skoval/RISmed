@@ -1,10 +1,9 @@
 import(methods)
 exportClasses(EUtilsSummary,Medline)
 export(Medline,EUtilsSummary,EUtilsQuery,EUtilsGet,QueryTranslation,QueryId,QueryCount)
-exportMethods(Cited, Query, PMID, Year, Month, Day, Author, ISSN, 
+exportMethods(Cited, Query, PMID, YearAccepted, MonthAccepted, DayAccepted, MinuteAccepted, HourAccepted, YearReceived, MonthReceived, DayReceived, MinuteReceived, HourReceived, YearEpublish, MonthEpublish, DayEpublish, MinuteEpublish, HourEpublish, YearPpublish, MonthPpublish, DayPpublish, MinutePpublish, HourPpublish, YearPmc, MonthPmc, DayPmc, MinutePmc, HourPmc, YearPubmed, MonthPubmed, DayPubmed, MinutePubmed, HourPubmed, Author, ISSN, 
 Title, ArticleTitle, ELocationID, AbstractText, Affiliation, 
-Language, PublicationType, MedlineTA, NlmUniqueID, ISSNLinking, 
-Hour, Minute, PublicationStatus, ArticleId, Volume, 
+Language, PublicationType, MedlineTA, NlmUniqueID, ISSNLinking, PublicationStatus, ArticleId, Volume, 
 Issue, ISOAbbreviation, MedlinePgn, CopyrightInformation, 
 Country,GrantID, Acronym, Agency, RegistryNumber, RefSource, CollectiveName, Mesh)
 exportMethods(print,show,summary)

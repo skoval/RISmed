@@ -17,9 +17,36 @@ Objects can be created by calls of the form \code{new("Medline", ...)}.
   \describe{
 \item{\code{Query}:}{}
 \item{\code{PMID}:}{}                
-\item{\code{Year}:}{}                
-\item{\code{Month}:}{}               
-\item{\code{Day}:}{}                 
+\item{\code{YearAccepted}:}{}                
+\item{\code{MonthAccepted}:}{}               
+\item{\code{DayAccepted}:}{}   
+\item{\code{HourAccepted}:}{}                
+\item{\code{MinuteAccepted}:}{}      
+\item{\code{YearReceived}:}{}                
+\item{\code{MonthReceived}:}{}               
+\item{\code{DayReceived}:}{}   
+\item{\code{HourReceived}:}{}                
+\item{\code{MinuteReceived}:}{}   
+\item{\code{YearEpublish}:}{}                
+\item{\code{MonthEpublish}:}{}               
+\item{\code{DayEpublish}:}{}   
+\item{\code{HourEpublish}:}{}                
+\item{\code{MinuteEpublish}:}{}      
+\item{\code{YearPpublish}:}{}                
+\item{\code{MonthPpublish}:}{}               
+\item{\code{DayPpublish}:}{}   
+\item{\code{HourPpublish}:}{}                
+\item{\code{MinutePpublish}:}{}    
+\item{\code{YearPmc}:}{}                
+\item{\code{MonthPmc}:}{}               
+\item{\code{DayPmc}:}{}   
+\item{\code{HourPmc}:}{}                
+\item{\code{MinutePmc}:}{}      
+\item{\code{YearPubmed}:}{}                
+\item{\code{MonthPubmed}:}{}               
+\item{\code{DayPubmed}:}{}   
+\item{\code{HourPubmed}:}{}                
+\item{\code{MinutePubmed}:}{}      
 \item{\code{Author}:}{ list of data frames giving \code{LastName}, \code{ForeName}, \code{Initials}, and \code{order} of authors by PubMed article.}              
 \item{\code{ISSN}:}{}                
 \item{\code{Title}:}{}               
@@ -31,9 +58,7 @@ Objects can be created by calls of the form \code{new("Medline", ...)}.
 \item{\code{PublicationType}:}{}     
 \item{\code{MedlineTA}:}{}           
 \item{\code{NlmUniqueID}:}{}         
-\item{\code{ISSNLinking}:}{}         
-\item{\code{Hour}:}{}                
-\item{\code{Minute}:}{}              
+\item{\code{ISSNLinking}:}{}                      
 \item{\code{PublicationStatus}:}{}   
 \item{\code{ArticleId}:}{}           
 \item{\code{Volume}:}{}              
@@ -58,9 +83,36 @@ Objects can be created by calls of the form \code{new("Medline", ...)}.
 \item{show}{\code{signature(object = "Medline")}: ...} 
 \item{Query}{\code{signature(object = "Medline")}: ...}                
 \item{PMID}{\code{signature(object = "Medline")}: ...}                
-\item{Year}{\code{signature(object = "Medline")}: ...}                
-\item{Month}{\code{signature(object = "Medline")}: ...}               
-\item{Day}{\code{signature(object = "Medline")}: ...}                 
+\item{YearAccepted}{\code{signature(object = "Medline")}: ...}                
+\item{MonthAccepted}{\code{signature(object = "Medline")}: ...}               
+\item{DayAccepted}{\code{signature(object = "Medline")}: ...}                 
+\item{HourAccepted}{\code{signature(object = "Medline")}: ...}                
+\item{MinuteAccepted}{\code{signature(object = "Medline")}: ...}   
+\item{YearReceived}{\code{signature(object = "Medline")}: ...}                
+\item{MonthReceived}{\code{signature(object = "Medline")}: ...}               
+\item{DayReceived}{\code{signature(object = "Medline")}: ...}                 
+\item{HourReceived}{\code{signature(object = "Medline")}: ...}                
+\item{MinuteReceived}{\code{signature(object = "Medline")}: ...} 
+\item{YearEpublish}{\code{signature(object = "Medline")}: ...}                
+\item{MonthEpublish}{\code{signature(object = "Medline")}: ...}               
+\item{DayEpublish}{\code{signature(object = "Medline")}: ...}                 
+\item{HourEpublish}{\code{signature(object = "Medline")}: ...}                
+\item{MinuteEpublish}{\code{signature(object = "Medline")}: ...} 
+\item{YearPpublish}{\code{signature(object = "Medline")}: ...}                
+\item{MonthPpublish}{\code{signature(object = "Medline")}: ...}               
+\item{DayPpublish}{\code{signature(object = "Medline")}: ...}                 
+\item{HourPpublish}{\code{signature(object = "Medline")}: ...}                
+\item{MinutePpublish}{\code{signature(object = "Medline")}: ...} 
+\item{YearPmc}{\code{signature(object = "Medline")}: ...}                
+\item{MonthPmc}{\code{signature(object = "Medline")}: ...}               
+\item{DayPmc}{\code{signature(object = "Medline")}: ...}                 
+\item{HourPmc}{\code{signature(object = "Medline")}: ...}                
+\item{MinutePmc}{\code{signature(object = "Medline")}: ...}  
+\item{YearPubmed}{\code{signature(object = "Medline")}: ...}                
+\item{MonthPubmed}{\code{signature(object = "Medline")}: ...}               
+\item{DayPubmed}{\code{signature(object = "Medline")}: ...}                 
+\item{HourPubmed}{\code{signature(object = "Medline")}: ...}                
+\item{MinutePubmed}{\code{signature(object = "Medline")}: ...}           
 \item{Author}{\code{signature(object = "Medline")}: ...}
 \item{ISSN}{\code{signature(object = "Medline")}: ...}                
 \item{Title}{\code{signature(object = "Medline")}: ...}               
@@ -73,8 +125,6 @@ Objects can be created by calls of the form \code{new("Medline", ...)}.
 \item{MedlineTA}{\code{signature(object = "Medline")}: ...}           
 \item{NlmUniqueID}{\code{signature(object = "Medline")}: ...}         
 \item{ISSNLinking}{\code{signature(object = "Medline")}: ...}         
-\item{Hour}{\code{signature(object = "Medline")}: ...}                
-\item{Minute}{\code{signature(object = "Medline")}: ...}              
 \item{PublicationStatus}{\code{signature(object = "Medline")}: ...}   
 \item{ArticleId}{\code{signature(object = "Medline")}: ...}           
 \item{Volume}{\code{signature(object = "Medline")}: ...}              
