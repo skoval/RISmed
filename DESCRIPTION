@@ -2,7 +2,7 @@ Package: RISmed
 Version: 2.1.5
 Type: Package
 Title: Download content from NCBI databases
-Date: 2-4-2015
+Date: 3-2-2015
 Author: Stephanie Kovalchik
 Depends: R (>= 2.8.0), methods
 Maintainer: S. A. Kovalchik <s.a.kovalchik@gmail.com>
