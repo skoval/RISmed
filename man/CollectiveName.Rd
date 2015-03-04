@@ -19,8 +19,3 @@ CollectiveName(object)
 \value{vector}
 
 \seealso{\code{\link{Medline}}}
-
-\examples{
-data(myeloma)
-CollectiveName(myeloma)
-}

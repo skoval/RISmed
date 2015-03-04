@@ -56,7 +56,7 @@ MEDLINE/PubMed Field Descriptions
 \examples{
 
 # PUBMED QUERY FOR MYELOMA ARTICLES FOR LAST YEAR
-res <- EUtilsSummary("myeloma[ti]",retmax=10,reldate=365)
+res <- EUtilsSummary("myeloma[ti]",retmax=2,reldate=365)
 
 summary(res)
 

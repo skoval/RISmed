@@ -63,7 +63,7 @@ MEDLINE/PubMed Field Descriptions
 \examples{
 
 # PUBMED QUERY
-res <- EUtilsSummary("myeloma[ti] jones[au]")
+res <- EUtilsSummary("myeloma[ti] jones[au]", retmax = 10)
 
 res
 
@@ -73,7 +73,7 @@ QueryId(res)
 QueryTranslation(res)
 
 # PROTEIN QUERY
-res <- EUtilsSummary("C-reactive[ti]",db="protein")
+res <- EUtilsSummary("C-reactive[ti]",db="protein", retmax = 10)
 summary(res)
 
 }

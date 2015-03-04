@@ -1,10 +1,10 @@
 Package: RISmed
 Version: 2.1.5
 Type: Package
-Title: Download content from NCBI databases
+Title: Download Content from NCBI Databases
 Date: 3-2-2015
 Author: Stephanie Kovalchik
 Depends: R (>= 2.8.0), methods
 Maintainer: S. A. Kovalchik <s.a.kovalchik@gmail.com>
-Description: Download content from NCBI databases. This package is intended to facilitate analyses of NCBI database content. This package is not intended for reference management.
+Description: A set of tools to extract bibliographic content from the National Center for Biotechnology Information (NCBI) databases, including PubMed. The name RISmed is a portmanteau of RIS (for Research Information Systems, a common tag format for bibliographic data) and PubMed.
 License: GPL (>= 2)
