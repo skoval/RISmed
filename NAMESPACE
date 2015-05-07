@@ -6,4 +6,4 @@ Title, ArticleTitle, ELocationID, AbstractText, Affiliation,
 Language, PublicationType, MedlineTA, NlmUniqueID, ISSNLinking, PublicationStatus, ArticleId, Volume, 
 Issue, ISOAbbreviation, MedlinePgn, CopyrightInformation, 
 Country,GrantID, Acronym, Agency, RegistryNumber, RefSource, CollectiveName, Mesh)
-exportMethods(print,show,summary)
+exportMethods(print,show,summary,c)

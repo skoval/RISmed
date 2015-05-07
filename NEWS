@@ -55,4 +55,8 @@ Version 2.1.5
 
 Add method Cited for Medline and EUtilsSummary classes. Fixed bug with Day extractor. Expanded date extractors for Medline object (Year, Month, Day, Hour, Minute) to allow dates for the following events in article publication history: accepted, received, epublish, ppublish, pmc, and pubmed. Corrected issue with structured abstracts.
 
+-------------------------------------------------------------------------------
 
+Version 2.1.6
+
+Added concatenate method for Medline class.

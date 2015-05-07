@@ -81,6 +81,7 @@ Objects can be created by calls of the form \code{new("Medline", ...)}.
   \describe{
 \item{print}{\code{signature(x = "Medline", ...)}: ...} 
 \item{show}{\code{signature(object = "Medline")}: ...} 
+\item{c}{\code{signature(x = "Medline", ...)}: ...} 
 \item{Query}{\code{signature(object = "Medline")}: ...}                
 \item{PMID}{\code{signature(object = "Medline")}: ...}                
 \item{YearAccepted}{\code{signature(object = "Medline")}: ...}                
