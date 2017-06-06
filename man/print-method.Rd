@@ -20,5 +20,6 @@ Query translation (if provided) and total fetched record count for \code{Medline
 
 }
 }
+
 \keyword{methods}
 

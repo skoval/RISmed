@@ -4,7 +4,8 @@ collapse <- function(...){paste(...,sep="",collapse="")}
 EUtilsURL <- function(type="esearch",db="pubmed"){
 	
 	# CONSTRUCT ANY SERVICE TYPE AND DATABASE
-	url <- 	"http://eutils.ncbi.nlm.nih.gov/entrez/eutils/type.fcgi?db=DB&"
+	url <- 	"https://eutils.ncbi.nlm.nih.gov/entrez/eutils/type.fcgi?db=DB&"
+	
 sub("(.*)(type)(.*)(DB)(.*)",collapse("\\1",type,"\\3",db,"\\5"),url)
 }
 

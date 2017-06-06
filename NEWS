@@ -60,3 +60,9 @@ Add method Cited for Medline and EUtilsSummary classes. Fixed bug with Day extra
 Version 2.1.6
 
 Added concatenate method for Medline class.
+
+-------------------------------------------------------------------------------
+
+Version 2.1.7
+
+Added additional Affiliations to Affiliation method, now returns a list of all affiliations in the same order as the authors.

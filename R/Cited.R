@@ -5,7 +5,7 @@ if(class(object)[1] == "EUtilsSummary" && object@db != "pubmed")
 
 f <- function(id){
 
-	base <- "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?retmode=xml&dbfrom=pubmed&id=ID&cmd=neighbor"
+	base <- "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?retmode=xml&dbfrom=pubmed&id=ID&cmd=neighbor"
 	base <- sub("ID", id, base)
 	
 	the_url <- url(description = base)
