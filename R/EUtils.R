@@ -178,15 +178,15 @@ ParseEUtilsFetch
 First_Upper <- function(x) paste(toupper(substr(x,1,1)),substr(x,2,nchar(x)),collapse = "", sep = "")
 
 LinesWithValues <- function(.obj){
-	grep(">(\\[?[a-zA-Z]|[0-9]).*<",.obj)
+	grep(">([^<]+?)<",.obj)
 }
 
 GetFields <- function(.obj){
-	sub("(.*<)([a-zA-Z]+)(.*>)(\\[?([a-zA-Z]|[0-9]).*<..*>.*)","\\2",.obj)
+	sub("(.*<)([A-z]+)(.*>)([^<]+?)(<.*)","\\2",.obj)
 }
 
 GetValues <- function(.obj){
-	sub("(.*<)([a-zA-Z]+)(.*>)(\\[?([a-zA-Z]|[0-9]).*)(<..*>.*)","\\4",.obj)
+	sub("(.*<)([A-z]+)(.*>)([^<]+?)(<.*)","\\4",.obj)
 }
 
 ArticleStart <- function(.obj) which(.obj=="<PubmedArticle>")
