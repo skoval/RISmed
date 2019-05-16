@@ -5,5 +5,5 @@ exportMethods(Cited, Query, PMID, YearAccepted, MonthAccepted, DayAccepted, Minu
 Title, ArticleTitle, ELocationID, AbstractText, Affiliation, 
 Language, PublicationType, MedlineTA, NlmUniqueID, ISSNLinking, PublicationStatus, ArticleId, Volume, 
 Issue, ISOAbbreviation, MedlinePgn, CopyrightInformation, 
-Country,GrantID, Acronym, Agency, RegistryNumber, RefSource, CollectiveName, Mesh)
+Country,GrantID, Acronym, Agency, RegistryNumber, RefSource, CollectiveName, COIStatement, Mesh)
 exportMethods(print,show,summary,c)

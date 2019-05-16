@@ -66,3 +66,9 @@ Added concatenate method for Medline class.
 Version 2.1.7
 
 Added additional Affiliations to Affiliation method, now returns a list of all affiliations in the same order as the authors.
+
+-------------------------------------------------------------------------------
+
+Version 2.1.8
+
+Added COIStatement to Medline methods.

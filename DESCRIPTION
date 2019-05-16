@@ -1,8 +1,8 @@
 Package: RISmed
-Version: 2.1.7
+Version: 2.1.8
 Type: Package
 Title: Download Content from NCBI Databases
-Date: 2017-6-5
+Date: 2019-5-16
 Authors@R: person("Stephanie", "Kovalchik", email = "s.a.kovalchik@gmail.com",
                   role = c("aut", "cre"))
 Depends: R (>= 2.8.0), methods
@@ -11,9 +11,8 @@ Description: A set of tools to extract bibliographic content from the National
     name RISmed is a portmanteau of RIS (for Research Information Systems, a common
     tag format for bibliographic data) and PubMed.
 License: GPL (>= 2)
-RoxygenNote: 5.0.1
+RoxygenNote: 6.1.1
 NeedsCompilation: no
 Packaged: 2016-11-02 00:05:19 UTC; skovalchik
 Author: Stephanie Kovalchik [aut, cre]
 Maintainer: Stephanie Kovalchik <s.a.kovalchik@gmail.com>
-

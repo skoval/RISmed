@@ -2,14 +2,15 @@
 % Please edit documentation in R/MedlineC.R
 \docType{methods}
 \name{c,Medline-method}
-\alias{c,ANY,ANY-method}
 \alias{c,Medline-method}
+\alias{c,ANY,ANY-method}
 \title{Concatenate Medline}
 \usage{
 \S4method{c}{Medline}(x, ...)
 }
 \arguments{
 \item{x}{a Medline object}
+
 \item{...}{Additional Medline objects to concatenate}
 }
 \value{
@@ -18,4 +19,3 @@ A Medline object
 \description{
 Concatenates multiple Medline objects
 }
-

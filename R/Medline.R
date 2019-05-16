@@ -175,6 +175,7 @@ setClass("Medline",
 			RegistryNumber= "character",
 			RefSource= "character",
 			CollectiveName="character",
+			COIStatement = "character",
                        	Mesh="list")
 )
 
@@ -260,6 +261,7 @@ Medline <- function(object, query = character(0)){
 	RegistryNumber <- sapply(object, function(x) x["RegistryNumber"],USE.NAMES=FALSE)
 	RefSource <- sapply(object, function(x) x["RefSource"],USE.NAMES=FALSE)
 	CollectiveName <- sapply(object, function(x) x["CollectiveName"],USE.NAMES=FALSE)
+	COIStatement <- sapply(object, function(x) x["CoiStatement"],USE.NAMES=FALSE)
 
     Mesh <- lapply(object, GetMeshMajor)     
 	Author <- lapply(object, GetAuthors)
@@ -325,6 +327,7 @@ Medline <- function(object, query = character(0)){
 	RegistryNumber <- as.character(RegistryNumber)
 	RefSource <- as.character(RefSource)
 	CollectiveName <- as.character(CollectiveName)
+	COIStatement <- as.character(COIStatement)
   	
 	new("Medline",
 			Query = query,
@@ -385,6 +388,7 @@ Medline <- function(object, query = character(0)){
 			RegistryNumber = RegistryNumber, 
 			RefSource = RefSource, 
 			CollectiveName = CollectiveName,
+			COIStatement = COIStatement,
                         Mesh = Mesh
 	)
 }
@@ -458,6 +462,7 @@ setMethod("Agency","Medline",function(object) object@Agency)
 setMethod("RegistryNumber","Medline",function(object) object@RegistryNumber)            
 setMethod("RefSource","Medline",function(object) object@RefSource)                      
 setMethod("CollectiveName","Medline",function(object) object@CollectiveName)            
+setMethod("COIStatement","Medline",function(object) object@COIStatement) 
 setMethod("Mesh","Medline",function(object) object@Mesh)
 setMethod("Cited", "Medline", cited_function)
 

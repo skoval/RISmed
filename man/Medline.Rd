@@ -72,7 +72,8 @@ Objects can be created by calls of the form \code{new("Medline", ...)}.
 \item{\code{Agency}:}{}              
 \item{\code{RegistryNumber}:}{}      
 \item{\code{RefSource}:}{}           
-\item{\code{CollectiveName}:}{}   
+\item{\code{CollectiveName}:}{}  
+\item{\code{COIStatement}:}{}
 \item{\code{Mesh}:}{ list of data frames giving \code{Heading} and \code{Type} of MeSH term or \code{NA} if no terms are in MEDLINE record}
  }
 }
@@ -140,6 +141,7 @@ Objects can be created by calls of the form \code{new("Medline", ...)}.
 \item{RegistryNumber}{\code{signature(object = "Medline")}: ...}      
 \item{RefSource}{\code{signature(object = "Medline")}: ...}           
 \item{CollectiveName}{\code{signature(object = "Medline")}: ...}
+\item{COIStatement}{\code{signature(object = "Medline")}: ...}
 \item{Mesh}{\code{signature(object = "Medline")}: ...}   
   }
 }
