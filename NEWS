@@ -72,3 +72,9 @@ Added additional Affiliations to Affiliation method, now returns a list of all a
 Version 2.1.8
 
 Added COIStatement to Medline methods.
+
+--------------------------------------------------------------------------------
+
+Version 2.1.9
+
+Added names to Affiliations to link to authors

@@ -241,7 +241,15 @@ Medline <- function(object, query = character(0)){
 	Title <- sapply(object, function(x) x["Title"],USE.NAMES=FALSE)
 	ArticleTitle <- sapply(object, function(x) x["ArticleTitle"],USE.NAMES=FALSE)
 	ELocationID <- sapply(object, function(x) x["ELocationID"],USE.NAMES=FALSE)
-	Affiliation <- lapply(object, function(x) x[names(x) == "Affiliation"])
+	Affiliation <- lapply(object, function(x) {
+		index <- which(names(x) == "Affiliation")
+		values <- x[names(x) == "Affiliation"]
+		if(length(index) > 1){
+			order <- cumsum(c(1, as.numeric(diff(index) > 1)))
+			names(values) <- order
+			}
+		values
+		})
 	Language <- sapply(object, function(x) x["Language"],USE.NAMES=FALSE)
 	PublicationType <- lapply(object, function(x) x[names(x) == "PublicationType"])
 	MedlineTA <- sapply(object, function(x) x["MedlineTA"],USE.NAMES=FALSE)

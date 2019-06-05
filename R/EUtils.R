@@ -128,6 +128,7 @@ EUtilsSubGet <- function(ids, type="efetch", db="pubmed"){
 	EUtilsFetch <- collapse(FetchURL,IDStr)	
 	res <- readLines(collapse(EUtilsFetch,"&retmode=xml"), warn = FALSE, encoding = "UTF-8")
 	
+	
 	pubstatus <- c(
 		"received", 
 		"accepted",
