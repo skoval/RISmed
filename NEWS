@@ -78,3 +78,9 @@ Added COIStatement to Medline methods.
 Version 2.1.9
 
 Added names to Affiliations to link to authors
+
+--------------------------------------------------------------------------------
+
+Version 2.1.10
+
+Changes value identification to take anything between <> in the event special characters are present.

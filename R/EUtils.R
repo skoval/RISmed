@@ -128,7 +128,6 @@ EUtilsSubGet <- function(ids, type="efetch", db="pubmed"){
 	EUtilsFetch <- collapse(FetchURL,IDStr)	
 	res <- readLines(collapse(EUtilsFetch,"&retmode=xml"), warn = FALSE, encoding = "UTF-8")
 	
-	
 	pubstatus <- c(
 		"received", 
 		"accepted",
@@ -186,8 +185,21 @@ GetFields <- function(.obj){
 	sub("(.*<)([a-zA-Z]+)(.*>)(\\[?([a-zA-Z]|[0-9]).*<..*>.*)","\\2",.obj)
 }
 
+#GetValues <- function(.obj){
+#	sub("(.*<)([a-zA-Z]+)(.*>)(\\[?([a-zA-Z]|[0-9]).*)(<..*>.*)","\\4",.obj)
+#}
+
+LinesWithValues <- function(.obj){
+	grep(">.*<",.obj)
+}
+
+
+GetFields <- function(.obj){
+	sub("(.*<)([a-zA-Z]+)(.*>)(.*)(<..*>.*)","\\2",.obj)
+}
+
 GetValues <- function(.obj){
-	sub("(.*<)([a-zA-Z]+)(.*>)(\\[?([a-zA-Z]|[0-9]).*)(<..*>.*)","\\4",.obj)
+	sub("(.*<)([a-zA-Z]+)(.*>)(.*)(<..*>.*)","\\4",.obj)
 }
 
 ArticleStart <- function(.obj) which(.obj=="<PubmedArticle>")
