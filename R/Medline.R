@@ -112,6 +112,32 @@ setClass("Medline",
 	representation(
 			Query = "character",
 			PMID = "character",
+
+			YearRevised = "numeric",
+            MonthRevised = "numeric",
+            DayRevised= "numeric",
+	
+			YearPubDate = "numeric",
+            MonthPubDate = "character",
+            DayPubDate= "numeric",
+	
+			YearArticleDate = "numeric",
+            MonthArticleDate = "numeric",
+            DayArticleDate= "numeric",
+
+	
+			YearEntrez = "numeric",
+            MonthEntrez = "numeric",
+            DayEntrez= "numeric",
+			HourEntrez= "numeric",
+			MinuteEntrez= "numeric",           
+
+	
+			YearMedline = "numeric",
+            MonthMedline = "numeric",
+            DayMedline= "numeric",
+			HourMedline= "numeric",
+			MinuteMedline= "numeric",           
 	
 			YearReceived = "numeric",
             MonthReceived = "numeric",
@@ -192,6 +218,49 @@ Medline <- function(object, query = character(0)){
 		else
 			NA
 		}
+
+	YearRevised <- sapply(object, function(x) x["YearRevised"],USE.NAMES=FALSE)
+
+	MonthRevised <- sapply(object, function(x) x["MonthRevised"],USE.NAMES=FALSE)
+	
+	DayRevised <- sapply(object, function(x) x["DayRevised"],USE.NAMES=FALSE)
+
+	YearArticleDate <- sapply(object, function(x) x["YearArticleDate"],USE.NAMES=FALSE)
+	
+	MonthArticleDate <- sapply(object, function(x) x["MonthArticleDate"],USE.NAMES=FALSE)
+	
+	
+	DayArticleDate <- sapply(object, function(x) x["DayArticleDate"],USE.NAMES=FALSE)
+	
+
+	YearPubDate <-sapply(object, function(x) x["YearPubDate"],USE.NAMES=FALSE)
+	
+	MonthPubDate <- sapply(object, function(x) x["MonthPubDate"],USE.NAMES=FALSE)
+	
+	DayPubDate <- sapply(object, function(x) x["DayPubDate"],USE.NAMES=FALSE)
+
+
+	YearEntrez <- sapply(object, function(x) x["YearEntrez"],USE.NAMES=FALSE)
+
+	MonthEntrez <- sapply(object, function(x) x["MonthEntrez"],USE.NAMES=FALSE)
+
+	DayEntrez <- sapply(object, function(x) x["DayEntrez"],USE.NAMES=FALSE)
+
+	MinuteEntrez <- sapply(object, function(x) x["MinuteEnrez"],USE.NAMES=FALSE)
+
+	HourEntrez <- sapply(object, function(x) x["HourEntrez"],USE.NAMES=FALSE)
+
+
+	YearMedline <- sapply(object, function(x) x["YearMedline"],USE.NAMES=FALSE)
+
+	MonthMedline <- sapply(object, function(x) x["MonthMedline"],USE.NAMES=FALSE)
+
+	DayMedline <- sapply(object, function(x) x["DayMedline"],USE.NAMES=FALSE)
+
+	MinuteMedline <- sapply(object, function(x) x["MinuteMedline"],USE.NAMES=FALSE)
+
+	HourMedline <- sapply(object, function(x) x["HourMedline"],USE.NAMES=FALSE)
+
 
 	YearReceived <- mapply(FUN, index = TagIndex, obj = object, MoreArgs = list(field = "YearReceived"))
 	MonthReceived <- mapply(FUN, index = TagIndex, obj = object, MoreArgs = list(field = "MonthReceived"))
@@ -275,6 +344,28 @@ Medline <- function(object, query = character(0)){
 	Author <- lapply(object, GetAuthors)
 	
 	PMID <- as.character(PMID)
+	
+	YearRevised <- as.numeric(YearRevised)
+	MonthRevised <- as.numeric(MonthRevised)
+	DayRevised <- as.numeric(DayRevised)
+	YearPubDate <- as.numeric(YearPubDate)
+	MonthPubDate <- as.character(MonthPubDate)
+	DayPubDate <- as.numeric(DayPubDate)
+	YearArticleDate <- as.numeric(YearArticleDate)
+	MonthArticleDate <- as.numeric(MonthArticleDate)
+	DayArticleDate <- as.numeric(DayArticleDate)
+
+	YearEntrez <- as.numeric(YearEntrez)
+	MonthEntrez <- as.numeric(MonthEntrez)
+	DayEntrez <- as.numeric(DayEntrez)
+	HourEntrez <- as.numeric(HourEntrez)
+	MinuteEntrez <- as.numeric(MinuteEntrez)
+	YearMedline <- as.numeric(YearMedline)
+	MonthMedline <- as.numeric(MonthMedline)
+	DayMedline <- as.numeric(DayMedline)
+	HourMedline <- as.numeric(HourMedline)
+	MinuteMedline <- as.numeric(MinuteMedline)
+	
 	YearAccepted <- as.numeric(YearAccepted)
 	YearReceived <- as.numeric(YearReceived)
 	YearEpublish <- as.numeric(YearEpublish)
@@ -340,13 +431,32 @@ Medline <- function(object, query = character(0)){
 	new("Medline",
 			Query = query,
 			PMID = PMID,
+			YearRevised = YearRevised, 
+		    MonthRevised = MonthRevised , 
+		    DayRevised  = DayRevised, 
+			YearPubDate = YearPubDate, 
+		    MonthPubDate = MonthPubDate , 
+		    DayPubDate  = DayPubDate, 
+			YearArticleDate = YearArticleDate, 
+		    MonthArticleDate = MonthArticleDate , 
+		    DayArticleDate  = DayArticleDate, 
+			YearEntrez = YearEntrez, 
+		    MonthEntrez = MonthEntrez , 
+		    DayEntrez  = DayEntrez, 
+			HourEntrez = HourEntrez, 
+			MinuteEntrez = MinuteEntrez, 	
+			YearMedline = YearMedline, 
+		    MonthMedline = MonthMedline , 
+		    DayMedline  = DayMedline, 
+			HourMedline = HourMedline, 
+			MinuteMedline = MinuteMedline, 				
 			YearAccepted = YearAccepted, 
 		    MonthAccepted = MonthAccepted , 
 		    DayAccepted  = DayAccepted, 
 			HourAccepted = HourAccepted, 
 			MinuteAccepted = MinuteAccepted, 	
 			YearReceived = YearReceived, 
-		    MonthReceived = MonthReceived , 
+		    MonthReceived = MonthReceived, 
 		    DayReceived  = DayReceived, 
 			HourReceived = HourReceived, 
 			MinuteReceived = MinuteReceived, 
@@ -369,7 +479,7 @@ Medline <- function(object, query = character(0)){
 		    MonthPubmed = MonthPubmed , 
 		    DayPubmed  = DayPubmed, 
 			HourPubmed = HourPubmed, 
-			MinutePubmed = MinutePubmed, 													    
+			MinutePubmed = MinutePubmed, 											
 		    ISSN  = ISSN, 
 		    Title  = Title, 
 		    Author = Author,
@@ -414,6 +524,25 @@ setMethod("show","Medline",function(object){
 
 setMethod("Query","Medline",function(object) object@Query)                                
 setMethod("PMID","Medline",function(object) object@PMID)                                
+setMethod("YearRevised","Medline",function(object) object@YearRevised)                                
+setMethod("MonthRevised","Medline",function(object) object@MonthRevised)                              
+setMethod("DayRevised","Medline",function(object) object@DayRevised)                                  
+setMethod("YearPubDate","Medline",function(object) object@YearPubDate)                                
+setMethod("MonthPubDate","Medline",function(object) object@MonthPubDate)                              
+setMethod("DayPubDate","Medline",function(object) object@DayPubDate)                                  
+setMethod("YearArticleDate","Medline",function(object) object@YearArticleDate)                                
+setMethod("MonthArticleDate","Medline",function(object) object@MonthArticleDate)                              
+setMethod("DayArticleDate","Medline",function(object) object@DayArticleDate)                                  
+setMethod("YearEntrez","Medline",function(object) object@YearEntrez)                                
+setMethod("MonthEntrez","Medline",function(object) object@MonthEntrez)                              
+setMethod("DayEntrez","Medline",function(object) object@DayEntrez)                                  
+setMethod("HourEntrez","Medline",function(object) object@HourEntrez)                                
+setMethod("MinuteEntrez","Medline",function(object) object@MinuteEntrez)                            
+setMethod("YearMedline","Medline",function(object) object@YearMedline)                                
+setMethod("MonthMedline","Medline",function(object) object@MonthMedline)                              
+setMethod("DayMedline","Medline",function(object) object@DayMedline)                                  
+setMethod("HourMedline","Medline",function(object) object@HourMedline)                                
+setMethod("MinuteMedline","Medline",function(object) object@MinuteMedline)                            
 setMethod("YearAccepted","Medline",function(object) object@YearAccepted)                                
 setMethod("MonthAccepted","Medline",function(object) object@MonthAccepted)                              
 setMethod("DayAccepted","Medline",function(object) object@DayAccepted)                                  

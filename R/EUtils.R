@@ -126,15 +126,45 @@ EUtilsSubGet <- function(ids, type="efetch", db="pubmed"){
 	FetchURL <- EUtilsURL(type,db=db)
 	IDStr <- collapse("id=",paste(ids,collapse=","))
 	EUtilsFetch <- collapse(FetchURL,IDStr)	
-	res <- readLines(collapse(EUtilsFetch,"&retmode=xml"), warn = FALSE, encoding = "UTF-8")
 	
+	res <- readLines(collapse(EUtilsFetch,"&retmode=xml"), warn = FALSE, encoding = "UTF-8")	
+	
+	# Date replacements
+	index <- grep("<DateRevised>", res)
+	
+	if(length(index) != 0){
+		res[index + 1] <- sub("<Year>", "<YearRevised>", res[index + 1])
+		res[index + 2] <- sub("<Month>", "<MonthRevised>", res[index + 2])
+		res[index + 3] <- sub("<Day>", "<DayRevised>", res[index + 3])
+	}
+		
+	index <- grep("<PubDate>", res)
+	
+	if(length(index) != 0){
+		res[index + 1] <- sub("<Year>", "<YearPubDate>", res[index + 1])
+		res[index + 2] <- sub("<Month>", "<MonthPubDate>", res[index + 2])
+		res[index + 3] <- sub("<Day>", "<DayPubDate>", res[index + 3])
+		
+	}
+	
+	index <- grep("<ArticleDate", res)
+	
+	if(length(index) != 0){
+		res[index + 1] <- sub("<Year>", "<YearArticleDate>", res[index + 1])
+		res[index + 2] <- sub("<Month>", "<MonthArticleDate>", res[index + 2])
+		res[index + 3] <- sub("<Day>", "<DayArticleDate>", res[index + 3])
+	}
+		
+			
 	pubstatus <- c(
 		"received", 
 		"accepted",
 		"epublish",
 		"ppublish",
 		"pmc",
-		"pubmed"
+		"pubmed",
+		"entrez",
+		"medline"
 	)
 	
 	if(db=="pubmed"){
@@ -153,22 +183,30 @@ EUtilsSubGet <- function(ids, type="efetch", db="pubmed"){
 			}
 		}	
 
+		
 		if(any(grepl("AbstractText", x) & grepl("Label", x))){
-			index <- which(grepl("AbstractText", x) & grepl("Label", x))
-			labels <- sub("(.*Label.*[[:punct:]])([A-Z].*[A-Z])([[:punct:]].*Nlm.*)","\\2",x[index])
-			for(i in 1:length(labels))
-				x[index[i]] <- sub("(.*>)(.*>)",paste(c("\\1",labels[i],": \\2"), collapse = ""),x[index[i]])
+			index <- grep("<AbstractText.*Label", x)
+			x[index] <- sub("</AbstractText>", "", x[index])
+			x[index] <- sub("(<AbstractText +)(.*)(>)", "\\2:", x[index])
+			x[index[1]] <- paste("<AbstractText>", gsub("<", "[", gsub(">", "]",  paste(x[index], collapse = " "))), "</AbstractText>", collapse = " ")
 		}
 		
-		val <- GetValues(x[LinesWithValues(x)])
-		names(val) <- GetFields(x[LinesWithValues(x)])
+		lines <- LinesWithValues(x)
+		full <- GetFullFields(x[lines])
+		exclusions <- grepl("ELocation.*pii", full)
+		val <- GetValues(x[lines[!exclusions]])
+		names(val) <- GetFields(x[lines[!exclusions]])
 	val
 	})
-
+	
 	}
 	else{
-		tags <- GetFields(res[LinesWithValues(res)])
-		ParseEUtilsFetch <- GetValues(res[LinesWithValues(res)])
+		
+		lines <- LinesWithValues(res)
+		full <- GetFullFields(res[lines])		
+		exclusions <- grepl("ELocation.*pii", full)
+		tags <- GetFields(res[lines[!exclusions]])
+		ParseEUtilsFetch <- GetValues(res[lines[!exclusions]])
 		names(ParseEUtilsFetch) <- tags
 	}
 	
@@ -193,6 +231,10 @@ LinesWithValues <- function(.obj){
 	grep(">.*<",.obj)
 }
 
+
+GetFullFields <- function(.obj){
+	sub("(.*<)([a-zA-Z].*)(>)(.*)(<..*>.*)","\\2",.obj)
+}
 
 GetFields <- function(.obj){
 	sub("(.*<)([a-zA-Z]+)(.*>)(.*)(<..*>.*)","\\2",.obj)

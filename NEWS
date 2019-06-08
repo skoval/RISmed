@@ -84,3 +84,9 @@ Added names to Affiliations to link to authors
 Version 2.1.10
 
 Changes value identification to take anything between <> in the event special characters are present.
+
+--------------------------------------------------------------------------------
+
+Version 2.1.11
+
+Fixed doi vs pii, added additional date variables, and fixed bug with structured abstracts.
