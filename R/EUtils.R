@@ -182,17 +182,20 @@ EUtilsSubGet <- function(ids, type="efetch", db="pubmed"){
 				x[index + 1:5] <- gsub("(Year|Month|Day|Hour|Minute)",paste(c("\\1",First_Upper(i)),collapse = ""), x[index + 1:5])
 			}
 		}	
-
 		
+		x[grep("AbstractText", x)] <- gsub("<[a-z]+>", "", x[grep("AbstractText", x)])
+		x[grep("AbstractText", x)] <- gsub("</[a-z]+>", "", x[grep("AbstractText", x)])
+		
+
 		if(any(grepl("AbstractText", x) & grepl("Label", x))){
 			index <- grep("<AbstractText.*Label", x)
 			x[index] <- sub("</AbstractText>", "", x[index])
 			x[index] <- sub("(<AbstractText +)(.*)(>)", "\\2:", x[index])
-			x[index[1]] <- paste("<AbstractText>", gsub("<", "[", gsub(">", "]",  paste(x[index], collapse = " "))), "</AbstractText>", collapse = " ")
+			x[index[1]] <- paste("<AbstractText>", paste(x[index], collapse = " "), "</AbstractText>", collapse = " ")
 		}
 		
 		lines <- LinesWithValues(x)
-		full <- GetFullFields(x[lines])
+		full <- GetFullFields(x[lines])		
 		exclusions <- grepl("ELocation.*pii", full)
 		val <- GetValues(x[lines[!exclusions]])
 		names(val) <- GetFields(x[lines[!exclusions]])
@@ -201,7 +204,6 @@ EUtilsSubGet <- function(ids, type="efetch", db="pubmed"){
 	
 	}
 	else{
-		
 		lines <- LinesWithValues(res)
 		full <- GetFullFields(res[lines])		
 		exclusions <- grepl("ELocation.*pii", full)
