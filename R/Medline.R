@@ -189,6 +189,7 @@ setClass("Medline",
 			ISSNLinking= "character",
 			PublicationStatus= "character",
 			ArticleId= "character",
+			DOI = "character",
 			Volume= "character",
 			Issue= "character",
 			ISOAbbreviation= "character",
@@ -219,6 +220,7 @@ Medline <- function(object, query = character(0)){
 			NA
 		}
 
+	
 	YearRevised <- sapply(object, function(x) x["YearRevised"],USE.NAMES=FALSE)
 
 	MonthRevised <- sapply(object, function(x) x["MonthRevised"],USE.NAMES=FALSE)
@@ -260,7 +262,6 @@ Medline <- function(object, query = character(0)){
 	MinuteMedline <- sapply(object, function(x) x["MinuteMedline"],USE.NAMES=FALSE)
 
 	HourMedline <- sapply(object, function(x) x["HourMedline"],USE.NAMES=FALSE)
-
 
 	YearReceived <- mapply(FUN, index = TagIndex, obj = object, MoreArgs = list(field = "YearReceived"))
 	MonthReceived <- mapply(FUN, index = TagIndex, obj = object, MoreArgs = list(field = "MonthReceived"))
@@ -326,6 +327,7 @@ Medline <- function(object, query = character(0)){
 	ISSNLinking <- sapply(object, function(x) x["ISSNLinking"],USE.NAMES=FALSE)
 	PublicationStatus <- sapply(object, function(x) x["PublicationStatus"],USE.NAMES=FALSE)
 	ArticleId <- sapply(object, function(x) x["ArticleId"],USE.NAMES=FALSE)
+	DOI <- sapply(object, function(x) x["DOI"],USE.NAMES=FALSE)
 	Volume <- sapply(object, function(x) x["Volume"],USE.NAMES=FALSE)
 	Issue <- sapply(object, function(x) x["Issue"],USE.NAMES=FALSE)
 	ISOAbbreviation <- sapply(object, function(x) x["ISOAbbreviation"],USE.NAMES=FALSE)
@@ -414,6 +416,7 @@ Medline <- function(object, query = character(0)){
 	ISSNLinking <- as.character(ISSNLinking)
 	PublicationStatus <- as.character(PublicationStatus)
 	ArticleId <- as.character(ArticleId)
+	DOI <- as.character(DOI)
 	Volume <- as.character(Volume)
 	Issue <- as.character(Issue)
 	ISOAbbreviation <- as.character(ISOAbbreviation)
@@ -494,6 +497,7 @@ Medline <- function(object, query = character(0)){
 			ISSNLinking = ISSNLinking, 
 			PublicationStatus = PublicationStatus, 
 			ArticleId = ArticleId, 
+			DOI = DOI, 
 			Volume = Volume, 
 			Issue = Issue, 
 			ISOAbbreviation = ISOAbbreviation, 
@@ -586,7 +590,8 @@ setMethod("MedlineTA","Medline",function(object) object@MedlineTA)
 setMethod("NlmUniqueID","Medline",function(object) object@NlmUniqueID)                  
 setMethod("ISSNLinking","Medline",function(object) object@ISSNLinking)                  
 setMethod("PublicationStatus","Medline",function(object) object@PublicationStatus)      
-setMethod("ArticleId","Medline",function(object) object@ArticleId)                      
+setMethod("ArticleId","Medline",function(object) object@ArticleId)       
+setMethod("DOI","Medline",function(object) object@DOI)                
 setMethod("Volume","Medline",function(object) object@Volume)                            
 setMethod("Issue","Medline",function(object) object@Issue)                              
 setMethod("ISOAbbreviation","Medline",function(object) object@ISOAbbreviation)          

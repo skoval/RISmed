@@ -1,8 +1,8 @@
 Package: RISmed
-Version: 2.1.11
+Version: 2.1.12
 Type: Package
 Title: Download Content from NCBI Databases
-Date: 2019-6-07
+Date: 2019-11-12
 Authors@R: person("Stephanie", "Kovalchik", email = "s.a.kovalchik@gmail.com",
                   role = c("aut", "cre"))
 Depends: R (>= 2.8.0), methods

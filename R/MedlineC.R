@@ -103,6 +103,7 @@ setMethod("c","Medline", function(x, ...){
 			ISSNLinking = unlist(lapply(GetComponents, function(x) x[["ISSNLinking"]])),
 			PublicationStatus = unlist(lapply(GetComponents, function(x) x[["PublicationStatus"]])),
 			ArticleId = unlist(lapply(GetComponents, function(x) x[["ArticleId"]])),
+			DOI = unlist(lapply(GetComponents, function(x) x[["DOI"]])),
 			Volume = unlist(lapply(GetComponents, function(x) x[["Volume"]])),
 			Issue = unlist(lapply(GetComponents, function(x) x[["Issue"]])),
 			ISOAbbreviation = unlist(lapply(GetComponents, function(x) x[["ISOAbbreviation"]])),

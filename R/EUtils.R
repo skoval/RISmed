@@ -129,6 +129,11 @@ EUtilsSubGet <- function(ids, type="efetch", db="pubmed"){
 	
 	res <- readLines(collapse(EUtilsFetch,"&retmode=xml"), warn = FALSE, encoding = "UTF-8")	
 	
+	index <- grep("Article.*doi", res)
+	
+	if(length(index) != 0)
+		res[index] <- sub("ArticleId", "DOI", res[index])
+	
 	# Date replacements
 	index <- grep("<DateRevised>", res)
 	
