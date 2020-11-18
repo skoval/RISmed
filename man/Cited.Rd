@@ -20,8 +20,3 @@ Cited(object)
 \value{vector}
 
 \seealso{\code{\link{Medline}}, \code{\link{EUtilsSummary}}}
-
-\examples{
-res <- EUtilsSummary("myeloma[ti]", mindate = "2002/01/01", maxdate = "2002/02/01", retmax = 5)
-Cited(res)
-}

@@ -21,16 +21,7 @@ Mesh(object)
 
 \seealso{\code{\link{Medline}}}
 
-\details{In Process and publisher-supplied records lack MeSH terms. See the MeSH Fact Sheet 
-\url{http://www.nlm.nih.gov/pubs/factsheets/mesh.html} or the MeSH home page 
-\url{http://www.nlm.nih.gov/mesh/meshhome.html} for additional information about MeSH.
+\details{In Process and publisher-supplied records lack MeSH terms. See the MeSH home page 
+\url{https://www.nlm.nih.gov/mesh/meshhome.html} for additional information about MeSH.
 Note that more recent records may lack MeSH headings.
-}
-
-\examples{
-res <- EUtilsSummary("myeloma[MeSh]",retmax=2,reldate=365)
-summary(res)
-fetch <- EUtilsGet(res)
-
-Mesh(fetch)
 }

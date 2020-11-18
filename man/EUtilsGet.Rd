@@ -26,7 +26,7 @@ Possible E-utilities to supply to \code{type} are \code{efetch}, \code{esummary}
 
 The database name supplied to \code{db} can be any valid Entrez database, such as \code{pubmed}, \code{protein}, \code{nlm}, etc.
 
-For further details on available E-utilities and databases visit \url{http://www.ncbi.nlm.nih.gov/books/NBK25499/}.
+For further details on available E-utilities and databases visit \url{https://www.ncbi.nlm.nih.gov/books/NBK25499/}.
 
 Note on usage:
 
@@ -45,29 +45,11 @@ For all other database, a vector with each element name the field returned from 
 \references{
 Summary help:
 
-\url{http://www.ncbi.nlm.nih.gov/books/NBK3827/}
+\url{https://www.ncbi.nlm.nih.gov/books/NBK3827/}
 
 MEDLINE/PubMed Field Descriptions
 
-\url{http://www.nlm.nih.gov/bsd/mms/medlineelements.html}
-
-}
-
-\examples{
-
-# PUBMED QUERY FOR MYELOMA ARTICLES FOR LAST YEAR
-res <- EUtilsSummary("myeloma[ti]",retmax=2,reldate=365)
-
-summary(res)
-
-fetch <- EUtilsGet(res)
-
-# PUBMED RETURNS A MEDLINE OBJECT
-fetch
-
-PMID(fetch)
-
-Author(fetch)[[1]]
+\url{https://www.nlm.nih.gov/bsd/mms/medlineelements.html}
 
 }
 

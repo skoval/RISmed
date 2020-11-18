@@ -195,7 +195,16 @@ EUtilsSubGet <- function(ids, type="efetch", db="pubmed"){
 		if(any(grepl("AbstractText", x) & grepl("Label", x))){
 			index <- grep("<AbstractText.*Label", x)
 			x[index] <- sub("</AbstractText>", "", x[index])
-			x[index] <- sub("(<AbstractText +)(.*)(>)", "\\2:", x[index])
+			# Look for Label/NLM construction
+			if(grepl("NLM", x[index][1], ignore = T)){
+				labels <- strsplit(sub("(<AbstractText.*>)(.*)", "\\1", x[index]), '"')
+				labels <- sapply(labels, function(x) ifelse(length(x) >= 2, x[2], ""))
+				x[index] <- sub("(.*<AbstractText.*>)(:?.*)", "\\2", x[index])
+				x[index] <- paste(labels, x[index])
+			}
+			else{
+				x[index] <- sub("(<AbstractText +)(.*)(>)", "\\2:", x[index])
+			}
 			x[index[1]] <- paste("<AbstractText>", paste(x[index], collapse = " "), "</AbstractText>", collapse = " ")
 		}
 		

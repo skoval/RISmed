@@ -29,7 +29,7 @@ Possible E-utilities to supply to \code{type} are \code{einfo}, \code{esearch}, 
 
 The database name supplied to \code{db} can be any valid Entrez database, such as \code{pubmed}, \code{protein}, \code{nlm}, etc.
 
-For further details on available E-utilities and databases visit \url{http://www.ncbi.nlm.nih.gov/books/NBK25499/}.
+For further details on available E-utilities and databases visit \url{https://www.ncbi.nlm.nih.gov/books/NBK25499/}.
 
 Limits that can be supplied to \code{...} to refine the \code{query} include:
 
@@ -53,29 +53,11 @@ Returns an \code{EUtilsSummary} object.
 \references{
 Summary help:
 
-\url{http://www.ncbi.nlm.nih.gov/books/NBK3827/}
+\url{https://www.ncbi.nlm.nih.gov/books/NBK3827/}
 
 MEDLINE/PubMed Field Descriptions
 
-\url{http://www.nlm.nih.gov/bsd/mms/medlineelements.html}
-}
-
-\examples{
-
-# PUBMED QUERY
-res <- EUtilsSummary("myeloma[ti] jones[au]", retmax = 10)
-
-res
-
-summary(res)
-QueryCount(res)
-QueryId(res)
-QueryTranslation(res)
-
-# PROTEIN QUERY
-res <- EUtilsSummary("C-reactive[ti]",db="protein", retmax = 10)
-summary(res)
-
+\url{https://www.nlm.nih.gov/bsd/mms/medlineelements.html}
 }
 
 \author{Stephanie Kovalchik \email{s.a.kovalchik@gmail.com}}

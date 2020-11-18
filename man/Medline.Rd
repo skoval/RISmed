@@ -16,7 +16,26 @@ Objects can be created by calls of the form \code{new("Medline", ...)}.
  Unless stated otherwise, each of the components is a vector of the given field where each element corresponds to a PubMed article. 
   \describe{
 \item{\code{Query}:}{}
-\item{\code{PMID}:}{}                
+\item{\code{PMID}:}{}    
+\item{\code{YearPubDate}:}{}                
+\item{\code{MonthPubDate}:}{}               
+\item{\code{DayPubDate}:}{}  
+\item{\code{YearRevised}:}{}                
+\item{\code{MonthRevised}:}{}               
+\item{\code{DayRevised}:}{}  
+\item{\code{YearEntrez}:}{}                
+\item{\code{MonthEntrez}:}{}               
+\item{\code{DayEntrez}:}{}   
+\item{\code{HourEntrez}:}{}                
+\item{\code{MinuteEntrez}:}{} 
+\item{\code{YearArticleDate}:}{}                
+\item{\code{MonthArticleDate}:}{}               
+\item{\code{DayArticleDate}:}{}   
+\item{\code{YearMedline}:}{}                
+\item{\code{MonthMedline}:}{}               
+\item{\code{DayMedline}:}{}   
+\item{\code{HourMedline}:}{}                
+\item{\code{MinuteMedline}:}{}
 \item{\code{YearAccepted}:}{}                
 \item{\code{MonthAccepted}:}{}               
 \item{\code{DayAccepted}:}{}   
@@ -60,7 +79,8 @@ Objects can be created by calls of the form \code{new("Medline", ...)}.
 \item{\code{NlmUniqueID}:}{}         
 \item{\code{ISSNLinking}:}{}                      
 \item{\code{PublicationStatus}:}{}   
-\item{\code{ArticleId}:}{}           
+\item{\code{ArticleId}:}{}     
+\item{\code{DOI}:}{}  
 \item{\code{Volume}:}{}              
 \item{\code{Issue}:}{}               
 \item{\code{ISOAbbreviation}:}{}     
@@ -84,7 +104,26 @@ Objects can be created by calls of the form \code{new("Medline", ...)}.
 \item{show}{\code{signature(object = "Medline")}: ...} 
 \item{c}{\code{signature(x = "Medline", ...)}: ...} 
 \item{Query}{\code{signature(object = "Medline")}: ...}                
-\item{PMID}{\code{signature(object = "Medline")}: ...}                
+\item{PMID}{\code{signature(object = "Medline")}: ...}     
+\item{YearPubDate}{\code{signature(object = "Medline")}: ...}               
+\item{MonthPubDate}{\code{signature(object = "Medline")}: ...}              
+\item{DayPubDate}{\code{signature(object = "Medline")}: ...} 
+\item{YearRevised}{\code{signature(object = "Medline")}: ...}               
+\item{MonthRevised}{\code{signature(object = "Medline")}: ...}              
+\item{DayRevised}{\code{signature(object = "Medline")}: ...} 
+\item{YearEntrez}{\code{signature(object = "Medline")}: ...}               
+\item{MonthEntrez}{\code{signature(object = "Medline")}: ...}              
+\item{DayEntrez}{\code{signature(object = "Medline")}: ...}  
+\item{HourEntrez}{\code{signature(object = "Medline")}: ...}               
+\item{MinuteEntrez}{\code{signature(object = "Medline")}: ...}
+\item{YearArticleDate}{\code{signature(object = "Medline")}: ...}               
+\item{MonthArticleDate}{\code{signature(object = "Medline")}: ...}              
+\item{DayArticleDate}{\code{signature(object = "Medline")}: ...}  
+\item{YearMedline}{\code{signature(object = "Medline")}: ...}               
+\item{MonthMedline}{\code{signature(object = "Medline")}: ...}              
+\item{DayMedline}{\code{signature(object = "Medline")}: ...}  
+\item{HourMedline}{\code{signature(object = "Medline")}: ...}               
+\item{MinuteMedline}{\code{signature(object = "Medline")}: ...} 
 \item{YearAccepted}{\code{signature(object = "Medline")}: ...}                
 \item{MonthAccepted}{\code{signature(object = "Medline")}: ...}               
 \item{DayAccepted}{\code{signature(object = "Medline")}: ...}                 
@@ -128,7 +167,8 @@ Objects can be created by calls of the form \code{new("Medline", ...)}.
 \item{NlmUniqueID}{\code{signature(object = "Medline")}: ...}         
 \item{ISSNLinking}{\code{signature(object = "Medline")}: ...}         
 \item{PublicationStatus}{\code{signature(object = "Medline")}: ...}   
-\item{ArticleId}{\code{signature(object = "Medline")}: ...}           
+\item{ArticleId}{\code{signature(object = "Medline")}: ...}   
+\item{DOI}{\code{signature(object = "Medline")}: ...} 
 \item{Volume}{\code{signature(object = "Medline")}: ...}              
 \item{Issue}{\code{signature(object = "Medline")}: ...}               
 \item{ISOAbbreviation}{\code{signature(object = "Medline")}: ...}     

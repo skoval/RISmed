@@ -20,7 +20,7 @@ MinutePubmed(object)
 
 \seealso{\code{\link{Medline}}}
 
-\references{\url{http://www.nlm.nih.gov/bsd/mms/medlineelements.html#phst}}
+\references{\url{https://www.nlm.nih.gov/bsd/mms/medlineelements.html#phst}}
 
 \examples{
 data(myeloma)

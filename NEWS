@@ -90,3 +90,9 @@ Changes value identification to take anything between <> in the event special ch
 Version 2.1.11
 
 Fixed doi vs pii, added additional date variables, and fixed bug with structured abstracts.
+
+-------------------------------------------------------------------------------
+
+Version 2.2
+
+Rebuild for R version 3.6.2 and put dependency on R >= 3.6.0.
