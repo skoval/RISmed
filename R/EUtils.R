@@ -197,10 +197,10 @@ EUtilsSubGet <- function(ids, type="efetch", db="pubmed"){
 			x[index] <- sub("</AbstractText>", "", x[index])
 			labels <- strsplit(sub("(<AbstractText.*>)(.*)", "\\1", x[index]), '"')
 			labels <- sapply(labels, function(x) ifelse(length(x) >= 2, x[2], ""))
-			labels <- toupper(trimsws(labels, which = "both"))
+			labels <- toupper(trimws(labels, which = "both"))
 			x[index] <- sub("(.*<AbstractText.*>:?)(.*)", "\\2", x[index])
 			x[index] <- paste(labels, x[index], sep = ":")
-			x[index[1]] <- paste("<AbstractText>", trimsws(paste(x[index], collapse = " "), which = "both"), "</AbstractText>", collapse = "")
+			x[index[1]] <- paste("<AbstractText>", trimws(paste(x[index], collapse = " "), which = "both"), "</AbstractText>", collapse = "")
 		}
 		
 		lines <- LinesWithValues(x)
