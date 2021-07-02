@@ -128,140 +128,16 @@ EUtilsSubGet <- function(ids, type="efetch", db="pubmed"){
 	EUtilsFetch <- collapse(FetchURL,IDStr)	
 	
 	res <- readLines(collapse(EUtilsFetch,"&retmode=xml"), warn = FALSE, encoding = "UTF-8")	
+	res <- readLines(collapse(EUtilsFetch,"&retmode=xml"), warn = FALSE, encoding = "UTF-8")
+	res <- xml2::read_xml(collapse(EUtilsFetch,"&retmode=xml"), encoding = "UTF-8")	
+	res <- xml2::as_list(res)[[1]]
 	
-	index <- grep("Article.*doi", res)
-	
-	if(length(index) != 0)
-		res[index] <- sub("ArticleId", "DOI", res[index])
-	
-	# Date replacements
-	index <- grep("<DateRevised>", res)
-	
-	if(length(index) != 0){
-		res[index + 1] <- sub("<Year>", "<YearRevised>", res[index + 1])
-		res[index + 2] <- sub("<Month>", "<MonthRevised>", res[index + 2])
-		res[index + 3] <- sub("<Day>", "<DayRevised>", res[index + 3])
+	if(db == "pubmed"){
+		res <- lapply(res, ParseMedline) # Return list for each artcile, missing elements are NULL
 	}
-		
-	index <- grep("<PubDate>", res)
-	
-	if(length(index) != 0){
-		res[index + 1] <- sub("<Year>", "<YearPubDate>", res[index + 1])
-		res[index + 2] <- sub("<Month>", "<MonthPubDate>", res[index + 2])
-		res[index + 3] <- sub("<Day>", "<DayPubDate>", res[index + 3])
-		
-	}
-	
-	index <- grep("<ArticleDate", res)
-	
-	if(length(index) != 0){
-		res[index + 1] <- sub("<Year>", "<YearArticleDate>", res[index + 1])
-		res[index + 2] <- sub("<Month>", "<MonthArticleDate>", res[index + 2])
-		res[index + 3] <- sub("<Day>", "<DayArticleDate>", res[index + 3])
-	}
-		
-			
-	pubstatus <- c(
-		"received", 
-		"accepted",
-		"epublish",
-		"ppublish",
-		"pmc",
-		"pubmed",
-		"entrez",
-		"medline"
-	)
-	
-	if(db=="pubmed"){
-	
-	ArticleList <- mapply(GroupArticle, start = ArticleStart(res),
-                              end = ArticleEnd(res),
-                              MoreArgs = list(.obj = res), 
-                              SIMPLIFY = FALSE)
 
-										
-	ParseEUtilsFetch <- lapply(ArticleList, function(x){
-		for(i in pubstatus){
-			if(any(grepl("PubStatus", x) & grepl(i, x))){
-				index <- which(grepl("PubStatus", x) & grepl(i, x))
-				x[index + 1:5] <- gsub("(Year|Month|Day|Hour|Minute)",paste(c("\\1",First_Upper(i)),collapse = ""), x[index + 1:5])
-			}
-		}	
-		
-		x[grep("AbstractText", x)] <- gsub("<[a-z]+>", "", x[grep("AbstractText", x)])
-		x[grep("AbstractText", x)] <- gsub("</[a-z]+>", "", x[grep("AbstractText", x)])
-		
-
-		if(any(grepl("AbstractText", x) & grepl("Label", x))){
-			index <- grep("<AbstractText.*Label", x)
-			x[index] <- sub("</AbstractText>", "", x[index])
-			labels <- strsplit(sub("(<AbstractText.*>)(.*)", "\\1", x[index]), '"')
-			labels <- sapply(labels, function(x) ifelse(length(x) >= 2, x[2], ""))
-			labels <- toupper(trimws(labels, which = "both"))
-			x[index] <- sub("(.*<AbstractText.*>:?)(.*)", "\\2", x[index])
-			x[index] <- paste(labels, x[index], sep = ":")
-			x[index[1]] <- paste("<AbstractText>", trimws(paste(x[index], collapse = " "), which = "both"), "</AbstractText>", collapse = "")
-		}
-		
-		lines <- LinesWithValues(x)
-		full <- GetFullFields(x[lines])		
-		exclusions <- grepl("ELocation.*pii", full)
-		val <- GetValues(x[lines[!exclusions]])
-		names(val) <- GetFields(x[lines[!exclusions]])
-	val
-	})
-	
-	}
-	else{
-		lines <- LinesWithValues(res)
-		full <- GetFullFields(res[lines])		
-		exclusions <- grepl("ELocation.*pii", full)
-		tags <- GetFields(res[lines[!exclusions]])
-		ParseEUtilsFetch <- GetValues(res[lines[!exclusions]])
-		names(ParseEUtilsFetch) <- tags
-	}
-	
-ParseEUtilsFetch
+res
 }
-
-First_Upper <- function(x) paste(toupper(substr(x,1,1)),substr(x,2,nchar(x)),collapse = "", sep = "")
-
-LinesWithValues <- function(.obj){
-	grep(">(\\[?[a-zA-Z]|[0-9]).*<",.obj)
-}
-
-GetFields <- function(.obj){
-	sub("(.*<)([a-zA-Z]+)(.*>)(\\[?([a-zA-Z]|[0-9]).*<..*>.*)","\\2",.obj)
-}
-
-#GetValues <- function(.obj){
-#	sub("(.*<)([a-zA-Z]+)(.*>)(\\[?([a-zA-Z]|[0-9]).*)(<..*>.*)","\\4",.obj)
-#}
-
-LinesWithValues <- function(.obj){
-	grep(">.*<",.obj)
-}
-
-
-GetFullFields <- function(.obj){
-	sub("(.*<)([a-zA-Z].*)(>)(.*)(<..*>.*)","\\2",.obj)
-}
-
-GetFields <- function(.obj){
-	sub("(.*<)([a-zA-Z]+)(.*>)(.*)(<..*>.*)","\\2",.obj)
-}
-
-GetValues <- function(.obj){
-	sub("(.*<)([a-zA-Z]+)(.*>)(.*)(<..*>.*)","\\4",.obj)
-}
-
-ArticleStart <- function(.obj) which(.obj=="<PubmedArticle>")
-ArticleEnd <- function(.obj) which(.obj=="</PubmedArticle>")
-GroupArticle <- function(start, end, .obj) .obj[start:end] 
-
-
-
-
 
 
 

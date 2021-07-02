@@ -1,22 +1,22 @@
-\name{Cited}
-\alias{Cited}
+\name{Citations}
+\alias{Citations}
 
 \title{
-Number of citations
+List of citing article titles where listed in PubMed.
 }
 
 \description{
-Retrieves the number of citations in PubMed Central for the articles contained in the \code{EUtilsSummary} or \code{Medline} object.
+Retrieves the number of citations in PubMed Central for the articles contained in the \code{Medline} object.
 }
 
 \usage{
-Cited(object)
+Citations(object)
 }
 
 \arguments{
-  \item{object}{instance of class \code{Medline} or \code{EUtilsSummary}}
+  \item{object}{instance of class \code{Medline}}
 }
 
 \value{vector}
 
-\seealso{\code{\link{Medline}}, \code{\link{EUtilsSummary}}}
+\seealso{\code{\link{Medline}}}

@@ -33,10 +33,23 @@ setMethod("c","Medline", function(x, ...){
 	for(x in GetComponents)
 		Authors <- c(Authors, x[["Author"]])
 
-	PublicationTypes <- list()
+	Affilitations <- list()
 	for(x in GetComponents)
-		PublicationTypes <- c(PublicationTypes, x[["PublicationType"]])
-					
+		Affilitations <- c(Affilitations, x[["Affiliation"]])
+
+	Keywords <- list()
+	for(x in GetComponents)
+		Keywords<- c(Keywords, x[["Keywords"]])
+		
+	Citations <- list()
+	for(x in GetComponents)
+		Citations <- c(Citations, x[["Citations"]])		
+
+	GrantID <- list()
+	for(x in GetComponents)
+		GrantID <- c(GrantID, x[["GrantID"]])		
+
+		
 	new("Medline",
 			Query = sapply(GetComponents, function(x) x[["Query"]]),
 			PMID = unlist(lapply(GetComponents, function(x) x[["PMID"]])),
@@ -95,9 +108,9 @@ setMethod("c","Medline", function(x, ...){
 		    ArticleTitle = unlist(lapply(GetComponents, function(x) x[["ArticleTitle"]])),
 			ELocationID = unlist(lapply(GetComponents, function(x) x[["ELocationID"]])),
 			AbstractText = unlist(lapply(GetComponents, function(x) x[["AbstractText"]])),
-			Affiliation = unlist(lapply(GetComponents, function(x) x[["Affiliation"]])),			
+			Affiliation = Affiliations,			
 			Language = unlist(lapply(GetComponents, function(x) x[["Language"]])),
-			PublicationType = PublicationTypes,
+			PublicationType =  unlist(lapply(GetComponents, function(x) x[["PublicationType"]])),
 			MedlineTA = unlist(lapply(GetComponents, function(x) x[["MedlineTA"]])),
 			NlmUniqueID = unlist(lapply(GetComponents, function(x) x[["NlmUniqueID"]])),
 			ISSNLinking = unlist(lapply(GetComponents, function(x) x[["ISSNLinking"]])),
@@ -110,14 +123,11 @@ setMethod("c","Medline", function(x, ...){
 			MedlinePgn = unlist(lapply(GetComponents, function(x) x[["MedlinePgn"]])),
 			CopyrightInformation = unlist(lapply(GetComponents, function(x) x[["CopyrightInformation"]])),
 			Country = unlist(lapply(GetComponents, function(x) x[["Country"]])),
-			GrantID = unlist(lapply(GetComponents, function(x) x[["GrantID"]])),
-			Acronym = unlist(lapply(GetComponents, function(x) x[["Acronym"]])),
-			Agency = unlist(lapply(GetComponents, function(x) x[["Agency"]])),
-			RegistryNumber = unlist(lapply(GetComponents, function(x) x[["RegistryNumber"]])),
-			RefSource = unlist(lapply(GetComponents, function(x) x[["RefSource"]])),
-			CollectiveName = unlist(lapply(GetComponents, function(x) x[["CollectiveName"]])),
+			GrantID = GrantID,
 	COIStatement = unlist(lapply(GetComponents, function(x) x[["COIStatement"]])),	
-            Mesh = MeshTerms
+            Mesh = MeshTerms,
+            Keywords = Keywords,
+            Citations = Citations
 	)
 	
 })

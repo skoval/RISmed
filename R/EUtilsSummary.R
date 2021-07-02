@@ -18,7 +18,6 @@ EUtilsSummary <- function(query,type="esearch",db="pubmed",url=NULL,encoding="un
 	lines <- readLines(url,warn=FALSE,encoding=encoding)
 	res <- ParseTags(lines)
 	
-#	EMPTYCHECK <- length(grep("<eSearchResult><Count>0<\\/Count>", lines))!=0
 	EMPTYCHECK <- length(grep("^(?:<eSearchResult>)?<Count>0<\\/Count>", lines))!=0	
 	
 	if(EMPTYCHECK){
@@ -52,7 +51,6 @@ setMethod("summary","EUtilsSummary",function(object,...){
 setMethod("QueryCount","EUtilsSummary",function(object) object@count)
 setMethod("QueryId","EUtilsSummary",function(object) object@PMID)
 setMethod("QueryTranslation","EUtilsSummary",function(object) object@querytranslation)
-setMethod("Cited", "EUtilsSummary", cited_function)
 
 
 

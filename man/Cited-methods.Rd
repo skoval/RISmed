@@ -1,11 +1,11 @@
-\name{Cited-methods}
+\name{Citations-methods}
 \docType{methods}
-\alias{Cited-methods}
-\alias{Cited,Medline-method}
-\alias{Cited,EUtilsSummary-method}
-\title{ ~~ Methods for Function \code{Cited} in Package \pkg{RISmed} ~~}
+\alias{Citations-methods}
+\alias{Citations,Medline-method}
+\alias{Citations,EUtilsSummary-method}
+\title{ ~~ Methods for Function \code{Citations} in Package \pkg{RISmed} ~~}
 \description{
- ~~ Methods for function \code{Cited} in package \pkg{RISmed} ~~
+ ~~ Methods for function \code{Citations} in package \pkg{RISmed} ~~
 }
 \section{Methods}{
 \describe{

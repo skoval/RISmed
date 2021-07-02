@@ -37,7 +37,7 @@ In order not to overload the E-utility servers, NCBI recommends that users post 
 \value{
 For queries to PubMed, a list by article, with named vectors for each field of the article result.
 
-For all other database, a vector with each element name the field returned from \code{XML} output.
+For all other database, a list of the \code{XML} tree strucure used where XML output is available in E-Utils.
 }
 
 \seealso{\code{\link{EUtilsSummary}}}

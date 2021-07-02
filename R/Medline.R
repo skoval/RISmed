@@ -1,113 +1,3 @@
-GetAuthors <- function(object){
-
-	names <- names(object)
-	
-	first.check <- grep("ForeName",names)
-	initial.check <- grep("Initials",names)
-	last.index <- grep("LastName",names)
-	
-	first.index <- last.index+1
-	initial.index <- last.index+2
-	
-	initial.index[!(initial.index%in%initial.check)] <- NA
-	first.index[!(first.index%in%first.check)] <- NA
-
-	if(length(last.index)==0){ # NO AUTHORS LISTED
-	
-	df <- data.frame(
-		LastName = NA,
-		ForeName = NA,
-		Initials = NA
-	)
-
-	df$order <- NA
-	
-	}
-	else{
-	
-	df <- data.frame(
-		LastName = as.character(object[last.index]),
-		ForeName = as.character(object[first.index]),
-		Initials = as.character(object[initial.index]),
-		stringsAsFactors=FALSE)
-
-	df$order <- 1:nrow(df)
-	
-	}
-df
-}
-
-
-# # GetAuthors <- function(object){
-
-	# names <- names(object)
-	
-	# first.index <- grep("ForeName",names)
-	# initial.index <- grep("Initials",names)
-	# last.index <- grep("LastName",names)
-	# lengths <- c(length(first.index),length(initial.index),length(last.index))
-	# maxlength <- max(lengths)
-	
-	# if(any(lengths!=maxlength)){
-		# max.index <- which(lengths==maxlength)[1]
-		# if(max.index==1){
-			# initial.index <- first.index+1
-			# last.index <- first.index+2 
-		# }
-		# else if(max.index==2){
-			# first.index <- initial.index-1
-			# last.index <- initial.index+1
-		# }
-		# else{
-			# initial.index <- last.index-1
-			# first.index <- last.index-2
-		# }
-	# }
-	
-	# if(all(lengths==0)){ # NO AUTHORS LISTED
-	
-	# df <- data.frame(
-		# LastName = NA,
-		# ForeName = NA,
-		# Initials = NA
-	# )
-
-	# df$order <- NA
-
-	
-	# }
-	# else{
-	
-	# df <- data.frame(
-		# LastName = as.character(object[last.index]),
-		# ForeName = as.character(object[first.index]),
-		# Initials = as.character(object[initial.index]),
-		# stringsAsFactors=FALSE)
-
-	# df$order <- 1:nrow(df)
-	
-	# }
-# df
-# }
-
-GetMeshMajor <- function(object){
-
-  names <- names(object)
-
-  if(any(names=="DescriptorName")){
-
-    index <- which(names=="DescriptorName")
-    index <- min(index):max(index)
-    data.frame(
-               Heading = object[index],
-               Type = ifelse(names[index]=="DescriptorName","Descriptor","Qualifier")
-               )
-  }
-  else
-    NA
-}
-
-
 setClass("Medline",
 	representation(
 			Query = "character",
@@ -183,7 +73,7 @@ setClass("Medline",
 			AbstractText= "character",
 			Affiliation= "list",
 			Language= "character",
-			PublicationType= "list",
+			PublicationType= "character",
 			MedlineTA= "character",
 			NlmUniqueID= "character",
 			ISSNLinking= "character",
@@ -196,155 +86,165 @@ setClass("Medline",
 			MedlinePgn= "character",
 			CopyrightInformation= "character",
 			Country= "character",
-			GrantID= "character",
-			Acronym= "character",
-			Agency= "character",
-			RegistryNumber= "character",
-			RefSource= "character",
-			CollectiveName="character",
+			GrantID= "list",
 			COIStatement = "character",
-                       	Mesh="list")
+            Mesh="list",
+            Keywords="list",
+            Citations="list")
 )
+
+null_replace <- function(x) ifelse(is.null(x), NA, x)
+
+list_null_replace <- function(x) if(class(x) == "NULL") NA else x
 
 Medline <- function(object, query = character(0)){
     
     TagIndex <- lapply(object, names)
     
 	# ARTICLE LIST FROM PUBMED QUERY
-	PMID <- sapply(object, function(x) x["PMID"],USE.NAMES=FALSE)
+	PMID <- sapply(object, function(x) null_replace(x[["PMID"]]),USE.NAMES=FALSE)
 	
-	FUN <- function(index, obj, field) {
-		if(any(index == field))
-			obj[max(which(index==field))]
-		else
-			NA
-		}
+	YearRevised <- sapply(object, function(x) null_replace(x[["YearRevised"]]),USE.NAMES=FALSE)
+	
+	MonthRevised <- sapply(object, function(x) null_replace(x[["MonthRevised"]]),USE.NAMES=FALSE)
+	
+	DayRevised <- sapply(object, function(x) null_replace(x[["DayRevised"]]),USE.NAMES=FALSE)
 
+	YearArticleDate <- sapply(object, function(x) null_replace(x[["YearArticleDate"]]),USE.NAMES=FALSE)
 	
-	YearRevised <- sapply(object, function(x) x["YearRevised"],USE.NAMES=FALSE)
-
-	MonthRevised <- sapply(object, function(x) x["MonthRevised"],USE.NAMES=FALSE)
-	
-	DayRevised <- sapply(object, function(x) x["DayRevised"],USE.NAMES=FALSE)
-
-	YearArticleDate <- sapply(object, function(x) x["YearArticleDate"],USE.NAMES=FALSE)
-	
-	MonthArticleDate <- sapply(object, function(x) x["MonthArticleDate"],USE.NAMES=FALSE)
+	MonthArticleDate <- sapply(object, function(x) null_replace(x[["MonthArticleDate"]]),USE.NAMES=FALSE)
 	
 	
-	DayArticleDate <- sapply(object, function(x) x["DayArticleDate"],USE.NAMES=FALSE)
+	DayArticleDate <- sapply(object, function(x) null_replace(x[["DayArticleDate"]]),USE.NAMES=FALSE)
 	
 
-	YearPubDate <-sapply(object, function(x) x["YearPubDate"],USE.NAMES=FALSE)
+	YearPubDate <-sapply(object, function(x) null_replace(x[["YearPubDate"]]),USE.NAMES=FALSE)
 	
-	MonthPubDate <- sapply(object, function(x) x["MonthPubDate"],USE.NAMES=FALSE)
+	MonthPubDate <- sapply(object, function(x) null_replace(x[["MonthPubDate"]]),USE.NAMES=FALSE)
 	
-	DayPubDate <- sapply(object, function(x) x["DayPubDate"],USE.NAMES=FALSE)
+	DayPubDate <- sapply(object, function(x) null_replace(x[["DayPubDate"]]),USE.NAMES=FALSE)
 
 
-	YearEntrez <- sapply(object, function(x) x["YearEntrez"],USE.NAMES=FALSE)
+	YearEntrez <- sapply(object, function(x) null_replace(x[["YearEntrez"]]),USE.NAMES=FALSE)
 
-	MonthEntrez <- sapply(object, function(x) x["MonthEntrez"],USE.NAMES=FALSE)
+	MonthEntrez <- sapply(object, function(x) null_replace(x[["MonthEntrez"]]),USE.NAMES=FALSE)
 
-	DayEntrez <- sapply(object, function(x) x["DayEntrez"],USE.NAMES=FALSE)
+	DayEntrez <- sapply(object, function(x) null_replace(x[["DayEntrez"]]),USE.NAMES=FALSE)
 
-	MinuteEntrez <- sapply(object, function(x) x["MinuteEnrez"],USE.NAMES=FALSE)
+	MinuteEntrez <- sapply(object, function(x) null_replace(x[["MinuteEnrez"]]),USE.NAMES=FALSE)
 
-	HourEntrez <- sapply(object, function(x) x["HourEntrez"],USE.NAMES=FALSE)
-
-
-	YearMedline <- sapply(object, function(x) x["YearMedline"],USE.NAMES=FALSE)
-
-	MonthMedline <- sapply(object, function(x) x["MonthMedline"],USE.NAMES=FALSE)
-
-	DayMedline <- sapply(object, function(x) x["DayMedline"],USE.NAMES=FALSE)
-
-	MinuteMedline <- sapply(object, function(x) x["MinuteMedline"],USE.NAMES=FALSE)
-
-	HourMedline <- sapply(object, function(x) x["HourMedline"],USE.NAMES=FALSE)
-
-	YearReceived <- mapply(FUN, index = TagIndex, obj = object, MoreArgs = list(field = "YearReceived"))
-	MonthReceived <- mapply(FUN, index = TagIndex, obj = object, MoreArgs = list(field = "MonthReceived"))
-	DayReceived <- mapply(FUN, index = TagIndex, obj = object, MoreArgs = list(field = "DayReceived"))
-	MinuteReceived <- mapply(FUN, index = TagIndex, obj = object, MoreArgs = list(field = "MinuteReceived"))
-	HourReceived <- mapply(FUN, index = TagIndex, obj = object, MoreArgs = list(field = "HourReceived"))
-
-	YearEpublish <- mapply(FUN, index = TagIndex, obj = object, MoreArgs = list(field = "YearEpublish"))
-	MonthEpublish <- mapply(FUN, index = TagIndex, obj = object, MoreArgs = list(field = "MonthEpublish"))
-	DayEpublish <- mapply(FUN, index = TagIndex, obj = object, MoreArgs = list(field = "DayEpublish"))
-	MinuteEpublish <- mapply(FUN, index = TagIndex, obj = object, MoreArgs = list(field = "MinuteEpublish"))
-	HourEpublish <- mapply(FUN, index = TagIndex, obj = object, MoreArgs = list(field = "HourEpublish"))
-
-	YearPpublish <- mapply(FUN, index = TagIndex, obj = object, MoreArgs = list(field = "YearPpublish"))
-	MonthPpublish <- mapply(FUN, index = TagIndex, obj = object, MoreArgs = list(field = "MonthPpublish"))
-	DayPpublish <- mapply(FUN, index = TagIndex, obj = object, MoreArgs = list(field = "DayPpublish"))
-	MinutePpublish <- mapply(FUN, index = TagIndex, obj = object, MoreArgs = list(field = "MinutePpublish"))
-	HourPpublish <- mapply(FUN, index = TagIndex, obj = object, MoreArgs = list(field = "HourPpublish"))
-
-	YearPmc <- mapply(FUN, index = TagIndex, obj = object, MoreArgs = list(field = "YearPmc"))
-	MonthPmc <- mapply(FUN, index = TagIndex, obj = object, MoreArgs = list(field = "MonthPmc"))
-	DayPmc <- mapply(FUN, index = TagIndex, obj = object, MoreArgs = list(field = "DayPmc"))
-	MinutePmc <- mapply(FUN, index = TagIndex, obj = object, MoreArgs = list(field = "MinutePmc"))
-	HourPmc <- mapply(FUN, index = TagIndex, obj = object, MoreArgs = list(field = "HourPmc"))
-
-	YearPubmed <- mapply(FUN, index = TagIndex, obj = object, MoreArgs = list(field = "YearPubmed"))
-	MonthPubmed <- mapply(FUN, index = TagIndex, obj = object, MoreArgs = list(field = "MonthPubmed"))
-	DayPubmed <- mapply(FUN, index = TagIndex, obj = object, MoreArgs = list(field = "DayPubmed"))
-	MinutePubmed <- mapply(FUN, index = TagIndex, obj = object, MoreArgs = list(field = "MinutePubmed"))
-	HourPubmed <- mapply(FUN, index = TagIndex, obj = object, MoreArgs = list(field = "HourPubmed"))
+	HourEntrez <- sapply(object, function(x) null_replace(x[["HourEntrez"]]),USE.NAMES=FALSE)
 
 
-	YearAccepted <- mapply(FUN, index = TagIndex, obj = object, MoreArgs = list(field = "YearAccepted"))
-	MonthAccepted <- mapply(FUN, index = TagIndex, obj = object, MoreArgs = list(field = "MonthAccepted"))
-	DayAccepted <- mapply(FUN, index = TagIndex, obj = object, MoreArgs = list(field = "DayAccepted"))
-	MinuteAccepted <- mapply(FUN, index = TagIndex, obj = object, MoreArgs = list(field = "MinuteAccepted"))
-	HourAccepted <- mapply(FUN, index = TagIndex, obj = object, MoreArgs = list(field = "HourAccepted"))
+	YearMedline <- sapply(object, function(x) null_replace(x[["YearMedline"]]),USE.NAMES=FALSE)
+
+	MonthMedline <- sapply(object, function(x) null_replace(x[["MonthMedline"]]),USE.NAMES=FALSE)
+
+	DayMedline <- sapply(object, function(x) null_replace(x[["DayMedline"]]),USE.NAMES=FALSE)
+
+	MinuteMedline <- sapply(object, function(x) null_replace(x[["MinuteMedline"]]),USE.NAMES=FALSE)
+
+	HourMedline <- sapply(object, function(x) null_replace(x[["HourMedline"]]),USE.NAMES=FALSE)
+
+	YearReceived <- sapply(object, function(x) null_replace(x[["YearReceived"]]),USE.NAMES=FALSE)
+
+	MonthReceived <- sapply(object, function(x) null_replace(x[["MonthReceived"]]),USE.NAMES=FALSE)
+
+	DayReceived <- sapply(object, function(x) null_replace(x[["DayReceived"]]),USE.NAMES=FALSE)
+
+	MinuteReceived <- sapply(object, function(x) null_replace(x[["MinuteReceived"]]),USE.NAMES=FALSE)
+
+	HourReceived <- sapply(object, function(x) null_replace(x[["HourReceived"]]),USE.NAMES=FALSE)
+
+	YearEpublish <- sapply(object, function(x) null_replace(x[["YearEpublish"]]),USE.NAMES=FALSE)
+
+	MonthEpublish <- sapply(object, function(x) null_replace(x[["MonthEpublish"]]),USE.NAMES=FALSE)
+
+	DayEpublish <- sapply(object, function(x) null_replace(x[["DayEpublish"]]),USE.NAMES=FALSE)
+
+	MinuteEpublish <- sapply(object, function(x) null_replace(x[["MinuteEpublish"]]),USE.NAMES=FALSE)
+
+	HourEpublish <- sapply(object, function(x) null_replace(x[["HourEpublish"]]),USE.NAMES=FALSE)
 	
-	AbstractCollapse <- function(index, obj, field) {
-			matches <- which(index==field)
-		paste(obj[matches], collapse = "")
-		}	
-		
-	AbstractText <- mapply(AbstractCollapse, index = TagIndex, obj = object, MoreArgs = list(field = "AbstractText"))
-		
-	ISSN <- sapply(object, function(x) x["ISSN"],USE.NAMES=FALSE)
-	Title <- sapply(object, function(x) x["Title"],USE.NAMES=FALSE)
-	ArticleTitle <- sapply(object, function(x) x["ArticleTitle"],USE.NAMES=FALSE)
-	ELocationID <- sapply(object, function(x) x["ELocationID"],USE.NAMES=FALSE)
-	Affiliation <- lapply(object, function(x) {
-		index <- which(names(x) == "Affiliation")
-		values <- x[names(x) == "Affiliation"]
-		if(length(index) > 1){
-			order <- cumsum(c(1, as.numeric(diff(index) > 1)))
-			names(values) <- order
-			}
-		values
-		})
-	Language <- sapply(object, function(x) x["Language"],USE.NAMES=FALSE)
-	PublicationType <- lapply(object, function(x) x[names(x) == "PublicationType"])
-	MedlineTA <- sapply(object, function(x) x["MedlineTA"],USE.NAMES=FALSE)
-	NlmUniqueID <- sapply(object, function(x) x["NlmUniqueID"],USE.NAMES=FALSE)
-	ISSNLinking <- sapply(object, function(x) x["ISSNLinking"],USE.NAMES=FALSE)
-	PublicationStatus <- sapply(object, function(x) x["PublicationStatus"],USE.NAMES=FALSE)
-	ArticleId <- sapply(object, function(x) x["ArticleId"],USE.NAMES=FALSE)
-	DOI <- sapply(object, function(x) x["DOI"],USE.NAMES=FALSE)
-	Volume <- sapply(object, function(x) x["Volume"],USE.NAMES=FALSE)
-	Issue <- sapply(object, function(x) x["Issue"],USE.NAMES=FALSE)
-	ISOAbbreviation <- sapply(object, function(x) x["ISOAbbreviation"],USE.NAMES=FALSE)
-	MedlinePgn <- sapply(object, function(x) x["MedlinePgn"],USE.NAMES=FALSE)
-	CopyrightInformation <- sapply(object, function(x) x["CopyrightInformation"],USE.NAMES=FALSE)
-	Country <- sapply(object, function(x) x["Country"],USE.NAMES=FALSE)
-	GrantID <- sapply(object, function(x) x["GrantID"],USE.NAMES=FALSE)
-	Acronym <- sapply(object, function(x) x["Acronym"],USE.NAMES=FALSE)
-	Agency <- sapply(object, function(x) x["Agency"],USE.NAMES=FALSE)
-	RegistryNumber <- sapply(object, function(x) x["RegistryNumber"],USE.NAMES=FALSE)
-	RefSource <- sapply(object, function(x) x["RefSource"],USE.NAMES=FALSE)
-	CollectiveName <- sapply(object, function(x) x["CollectiveName"],USE.NAMES=FALSE)
-	COIStatement <- sapply(object, function(x) x["CoiStatement"],USE.NAMES=FALSE)
+	YearPpublish <- sapply(object, function(x) null_replace(x[["YearPpublish"]]),USE.NAMES=FALSE)
 
-    Mesh <- lapply(object, GetMeshMajor)     
-	Author <- lapply(object, GetAuthors)
+	MonthPpublish <- sapply(object, function(x) null_replace(x[["MonthPpublish"]]),USE.NAMES=FALSE)
+
+	DayPpublish <- sapply(object, function(x) null_replace(x[["DayPpublish"]]),USE.NAMES=FALSE)
+
+	MinutePpublish <- sapply(object, function(x) null_replace(x[["MinutePpublish"]]),USE.NAMES=FALSE)
+
+	HourPpublish <- sapply(object, function(x) null_replace(x[["HourPpublish"]]),USE.NAMES=FALSE)
 	
+
+	YearPmc <- sapply(object, function(x) null_replace(x[["YearPmc"]]),USE.NAMES=FALSE)
+
+	MonthPmc <- sapply(object, function(x) null_replace(x[["MonthPmc"]]),USE.NAMES=FALSE)
+
+	DayPmc <- sapply(object, function(x) null_replace(x[["DayPmc"]]),USE.NAMES=FALSE)
+
+	MinutePmc <- sapply(object, function(x) null_replace(x[["MinutePmc"]]),USE.NAMES=FALSE)
+
+	HourPmc <- sapply(object, function(x) null_replace(x[["HourPmc"]]),USE.NAMES=FALSE)
+	
+	YearPubmed <- sapply(object, function(x) null_replace(x[["YearPubmed"]]),USE.NAMES=FALSE)
+
+	MonthPubmed <- sapply(object, function(x) null_replace(x[["MonthPubmed"]]),USE.NAMES=FALSE)
+
+	DayPubmed <- sapply(object, function(x) null_replace(x[["DayPubmed"]]),USE.NAMES=FALSE)
+
+	MinutePubmed <- sapply(object, function(x) null_replace(x[["MinutePubmed"]]),USE.NAMES=FALSE)
+
+	HourPubmed <- sapply(object, function(x) null_replace(x[["HourPubmed"]]),USE.NAMES=FALSE)
+	
+	YearAccepted <- sapply(object, function(x) null_replace(x[["YearAccepted"]]),USE.NAMES=FALSE)
+
+	MonthAccepted <- sapply(object, function(x) null_replace(x[["MonthAccepted"]]),USE.NAMES=FALSE)
+
+	DayAccepted <- sapply(object, function(x) null_replace(x[["DayAccepted"]]),USE.NAMES=FALSE)
+
+	MinuteAccepted <- sapply(object, function(x) null_replace(x[["MinuteAccepted"]]),USE.NAMES=FALSE)
+
+	HourAccepted <- sapply(object, function(x) null_replace(x[["HourAccepted"]]),USE.NAMES=FALSE)
+
+    AbstractText <- lapply(object, function(x) list_null_replace(x[["AbstractText"]]))
+    Author <- lapply(object, function(x) list_null_replace(x[["Author"]]))
+    Affiliation <- lapply(object, function(x) list_null_replace(x[["Affiliation"]]))
+    
+    names(AbstractText) <- PMID
+    names(Author) <- PMID
+    names(Affiliation) <- PMID
+    
+	ISSN <- sapply(object, function(x) null_replace(x[["ISSN"]]),USE.NAMES=FALSE)
+	Title <- sapply(object, function(x) null_replace(x[["Title"]]),USE.NAMES=FALSE)
+	ArticleTitle <- sapply(object, function(x) null_replace(x[["ArticleTitle"]]),USE.NAMES=FALSE)
+	ELocationID <- sapply(object, function(x) null_replace(x[["ELocationID"]]),USE.NAMES=FALSE)
+	Language <- sapply(object, function(x) null_replace(x[["Language"]]),USE.NAMES=FALSE)
+	PublicationType <- sapply(object, function(x) null_replace(x[["PublicationType"]]),USE.NAMES=FALSE)
+	MedlineTA <- sapply(object, function(x) null_replace(x[["MedlineTA"]]),USE.NAMES=FALSE)
+	NlmUniqueID <- sapply(object, function(x) null_replace(x[["NlmUniqueID"]]),USE.NAMES=FALSE)
+	ISSNLinking <- sapply(object, function(x) null_replace(x[["ISSNLinking"]]),USE.NAMES=FALSE)
+	PublicationStatus <- sapply(object, function(x) null_replace(x[["PublicationStatus"]]),USE.NAMES=FALSE)
+	ArticleId <- sapply(object, function(x) null_replace(x[["ArticleId"]]),USE.NAMES=FALSE)
+	DOI <- sapply(object, function(x) null_replace(x[["DOI"]]),USE.NAMES=FALSE)
+	Volume <- sapply(object, function(x) null_replace(x[["Volume"]]),USE.NAMES=FALSE)
+	Issue <- sapply(object, function(x) null_replace(x[["Issue"]]),USE.NAMES=FALSE)
+	ISOAbbreviation <- sapply(object, function(x) null_replace(x[["ISOAbbreviation"]]),USE.NAMES=FALSE)
+	MedlinePgn <- sapply(object, function(x) null_replace(x[["MedlinePgn"]]),USE.NAMES=FALSE)
+	CopyrightInformation <- sapply(object, function(x) null_replace(x[["CopyrightInformation"]]),USE.NAMES=FALSE)
+	Country <- sapply(object, function(x) null_replace(x[["Country"]]),USE.NAMES=FALSE)
+	GrantID <- lapply(object, function(x) list_null_replace(x[["GrantID"]]))
+	COIStatement <- sapply(object, function(x) null_replace(x[["CoiStatement"]]),USE.NAMES=FALSE)
+
+	Mesh <- lapply(object, function(x) list_null_replace(x[["Mesh"]]))
+	Keywords <- lapply(object, function(x) list_null_replace(x[["Keywords"]]))
+	Citations <- lapply(object, function(x) list_null_replace(x[["Citations"]]))
+	
+	names(GrantID) <- PMID
+	names(Mesh) <- PMID	
+	names(Keywords) <- PMID
+	names(Citations) <- PMID
+
 	PMID <- as.character(PMID)
 	
 	YearRevised <- as.numeric(YearRevised)
@@ -410,7 +310,7 @@ Medline <- function(object, query = character(0)){
 	AbstractText <- as.character(AbstractText)
 	Affiliation <- Affiliation
 	Language <- as.character(Language)
-	PublicationType <- PublicationType
+	PublicationType <- as.character(PublicationType)
 	MedlineTA <- as.character(MedlineTA)
 	NlmUniqueID <- as.character(NlmUniqueID)
 	ISSNLinking <- as.character(ISSNLinking)
@@ -423,13 +323,9 @@ Medline <- function(object, query = character(0)){
 	MedlinePgn <- as.character(MedlinePgn)
 	CopyrightInformation <- as.character(CopyrightInformation)
 	Country <- as.character(Country)
-	GrantID <- as.character(GrantID)
-	Acronym <- as.character(Acronym)
-	Agency <- as.character(Agency)
-	RegistryNumber <- as.character(RegistryNumber)
-	RefSource <- as.character(RefSource)
-	CollectiveName <- as.character(CollectiveName)
+	GrantID <- GrantID
 	COIStatement <- as.character(COIStatement)
+
   	
 	new("Medline",
 			Query = query,
@@ -505,13 +401,10 @@ Medline <- function(object, query = character(0)){
 			CopyrightInformation = CopyrightInformation, 
 			Country = Country, 
 			GrantID = GrantID, 
-			Acronym = Acronym, 
-			Agency = Agency, 
-			RegistryNumber = RegistryNumber, 
-			RefSource = RefSource, 
-			CollectiveName = CollectiveName,
 			COIStatement = COIStatement,
-                        Mesh = Mesh
+            Mesh = Mesh,
+            Keywords = Keywords,
+            Citations = Citations
 	)
 }
 
@@ -599,12 +492,8 @@ setMethod("MedlinePgn","Medline",function(object) object@MedlinePgn)
 setMethod("CopyrightInformation","Medline",function(object) object@CopyrightInformation)
 setMethod("Country","Medline",function(object) object@Country)                          
 setMethod("GrantID","Medline",function(object) object@GrantID)                          
-setMethod("Acronym","Medline",function(object) object@Acronym)                          
-setMethod("Agency","Medline",function(object) object@Agency)                            
-setMethod("RegistryNumber","Medline",function(object) object@RegistryNumber)            
-setMethod("RefSource","Medline",function(object) object@RefSource)                      
-setMethod("CollectiveName","Medline",function(object) object@CollectiveName)            
 setMethod("COIStatement","Medline",function(object) object@COIStatement) 
 setMethod("Mesh","Medline",function(object) object@Mesh)
-setMethod("Cited", "Medline", cited_function)
+setMethod("Keywords","Medline",function(object) object@Keywords)
+setMethod("Citations","Medline",function(object) object@Citations)
 

@@ -2,7 +2,7 @@
 \alias{GrantID}
 
 \title{
-Extracts \code{GrantID} from  \code{Medline} object.
+Extracts list of \code{GrantID} info  \code{Medline} object including \code{GrantID} and \code{GrantAgency} where listed in PubMed.
 }
 
 \description{

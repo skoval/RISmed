@@ -16,7 +16,7 @@ Author(object)
   \item{object}{instance of class \code{Medline}}
 }
 
-\value{List by Pubmed article. Each list contains a data frame with \code{LastName}, \code{ForeName}, \code{Initials}, and \code{order} of article authors.}
+\value{List by Pubmed article. Each list contains a data frame with \code{CollectiveName}, \code{LastName}, \code{ForeName}, \code{Initials}, and \code{order} of article authors.}
 
 \seealso{\code{\link{Medline}}}
 

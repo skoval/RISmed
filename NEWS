@@ -96,3 +96,10 @@ Fixed doi vs pii, added additional date variables, and fixed bug with structured
 Version 2.2
 
 Rebuild for R version 3.6.2 and put dependency on R >= 3.6.0.
+
+
+-------------------------------------------------------------------------------
+
+Version 2.3.0
+
+Adds xml2 to read in xml records and ensure a reliable structure. Parses XML as a list. Add Keywords and Citations to Medline object.
