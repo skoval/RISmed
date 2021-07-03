@@ -180,9 +180,10 @@ if(!is.null(x$MedlineCitation$Article$ArticleTitle))
 if(!is.null(x$MedlineCitation$Article$AuthorList)){
 	
 	Authors <- do.call("rbind", lapply(x$MedlineCitation$Article$AuthorList, function(z){
-		if(any(names(z) == "CollectiveName")){
+
+		if(any(names(z) == "CollectiveName") | (is.null(z$ForeName) & is.null(z$Initials))){
 			data.frame(
-			CollectiveName = as.character(z$CollectiveName[[1]]),
+			CollectiveName = ifelse(is.null(z$CollectiveName), as.character(z$LastName[[1]]), as.character(z$CollectiveName[[1]])),
 			LastName = NA,
 			ForeName = NA,
 			Initials = NA,
@@ -192,8 +193,8 @@ if(!is.null(x$MedlineCitation$Article$AuthorList)){
 		else{
 			data.frame(
 			CollectiveName = NA,
-			LastName = as.character(z$LastName[[1]]),
-			ForeName = as.character(z$ForeName[[1]]),
+			LastName = ifelse(is.null(z$LastName[[1]]), NA, as.character(z$LastName[[1]])),
+			ForeName = ifelse(is.null(z$ForeName[[1]]), NA, as.character(z$ForeName[[1]])),
 			Initials = ifelse(is.null(z$Initials[[1]]), NA, as.character(z$Initials[[1]])),
 			stringsAsFactors=FALSE
 			)			
