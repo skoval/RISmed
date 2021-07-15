@@ -87,14 +87,11 @@ Objects can be created by calls of the form \code{new("Medline", ...)}.
 \item{\code{MedlinePgn}:}{}          
 \item{\code{CopyrightInformation}:}{}
 \item{\code{Country}:}{}             
-\item{\code{GrantID}:}{}             
-\item{\code{Acronym}:}{}             
-\item{\code{Agency}:}{}              
-\item{\code{RegistryNumber}:}{}      
-\item{\code{RefSource}:}{}           
-\item{\code{CollectiveName}:}{}  
-\item{\code{COIStatement}:}{}
+\item{\code{GrantID}:}{}       
+\item{\code{COIStatement}:}{} 
 \item{\code{Mesh}:}{ list of data frames giving \code{Heading} and \code{Type} of MeSH term or \code{NA} if no terms are in MEDLINE record}
+\item{\code{Keywords}:}{}
+\item{\code{Citations}:}{}
  }
 }
 \section{Methods}{
@@ -176,13 +173,10 @@ Objects can be created by calls of the form \code{new("Medline", ...)}.
 \item{CopyrightInformation}{\code{signature(object = "Medline")}: ...}
 \item{Country}{\code{signature(object = "Medline")}: ...}             
 \item{GrantID}{\code{signature(object = "Medline")}: ...}             
-\item{Acronym}{\code{signature(object = "Medline")}: ...}             
-\item{Agency}{\code{signature(object = "Medline")}: ...}              
-\item{RegistryNumber}{\code{signature(object = "Medline")}: ...}      
-\item{RefSource}{\code{signature(object = "Medline")}: ...}           
-\item{CollectiveName}{\code{signature(object = "Medline")}: ...}
 \item{COIStatement}{\code{signature(object = "Medline")}: ...}
 \item{Mesh}{\code{signature(object = "Medline")}: ...}   
+\item{Keywords}{\code{signature(object = "Medline")}: ...}   
+\item{Affiliations}{\code{signature(object = "Medline")}: ...}   
   }
 }
 

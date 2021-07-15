@@ -108,7 +108,7 @@ setMethod("c","Medline", function(x, ...){
 		    ArticleTitle = unlist(lapply(GetComponents, function(x) x[["ArticleTitle"]])),
 			ELocationID = unlist(lapply(GetComponents, function(x) x[["ELocationID"]])),
 			AbstractText = unlist(lapply(GetComponents, function(x) x[["AbstractText"]])),
-			Affiliation = Affiliations,			
+			Affiliation = Affilitations,
 			Language = unlist(lapply(GetComponents, function(x) x[["Language"]])),
 			PublicationType =  unlist(lapply(GetComponents, function(x) x[["PublicationType"]])),
 			MedlineTA = unlist(lapply(GetComponents, function(x) x[["MedlineTA"]])),

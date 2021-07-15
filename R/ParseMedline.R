@@ -95,9 +95,10 @@ Fields[["DayArticleDate"]] <- x$MedlineCitation$Article$ArticleDate$Day[[1]]
 
 pubmed_states <- sapply(x$PubmedData$History, function(z) attr(z, "PubStatus"))
 
+
 if(length(pubmed_states) > 0){
 	if(any(pubmed_states == "entrez")){
-		i <- which(pubmed_states == "entrez")
+		i <- which(pubmed_states == "entrez")[1]
 		Fields[["YearEntrez"]] <- x$PubmedData$History[[i]]$Year[[1]]
 		Fields[["MonthEntrez"]] <- x$PubmedData$History[[i]]$Month[[1]]
 		Fields[["DayEntrez"]] <- x$PubmedData$History[[i]]$Day[[1]]
@@ -106,7 +107,7 @@ if(length(pubmed_states) > 0){
 	}
 	
 	if(any(pubmed_states == "medline")){
-		i <- which(pubmed_states == "medline")
+		i <- which(pubmed_states == "medline")[1]
 		Fields[["YearMedline"]] <- x$PubmedData$History[[i]]$Year[[1]]
 		Fields[["MonthMedline"]] <- x$PubmedData$History[[i]]$Month[[1]]
 		Fields[["DayMedline"]] <- x$PubmedData$History[[i]]$Day[[1]]
@@ -115,7 +116,7 @@ if(length(pubmed_states) > 0){
 	}	
 	
 	if(any(pubmed_states == "accepted")){
-		i <- which(pubmed_states == "accepted")
+		i <- which(pubmed_states == "accepted")[1]		
 		Fields[["YearAccepted"]] <- x$PubmedData$History[[i]]$Year[[1]]
 		Fields[["MonthAccepted"]] <- x$PubmedData$History[[i]]$Month[[1]]
 		Fields[["DayAccepted"]] <- x$PubmedData$History[[i]]$Day[[1]]
@@ -124,7 +125,7 @@ if(length(pubmed_states) > 0){
 	}	
 	
 	if(any(pubmed_states == "received")){
-		i <- which(pubmed_states == "received")
+		i <- which(pubmed_states == "received")[1]
 		Fields[["YearReceived"]] <- x$PubmedData$History[[i]]$Year[[1]]
 		Fields[["MonthReceived"]] <- x$PubmedData$History[[i]]$Month[[1]]
 		Fields[["DayReceived"]] <- x$PubmedData$History[[i]]$Day[[1]]
@@ -133,7 +134,7 @@ if(length(pubmed_states) > 0){
 	}	
 	
 	if(any(pubmed_states == "epublish")){
-		i <- which(pubmed_states == "epublish")
+		i <- which(pubmed_states == "epublish")[1]
 		Fields[["YearEpublish"]] <- x$PubmedData$History[[i]]$Year[[1]]
 		Fields[["MonthEpublish"]] <- x$PubmedData$History[[i]]$Month[[1]]
 		Fields[["DayEpublish"]] <- x$PubmedData$History[[i]]$Day[[1]]
@@ -142,7 +143,7 @@ if(length(pubmed_states) > 0){
 	}			
 
 	if(any(pubmed_states == "ppublish")){
-		i <- which(pubmed_states == "ppublish")
+		i <- which(pubmed_states == "ppublish")[1]
 		Fields[["YearPpublish"]] <- x$PubmedData$History[[i]]$Year[[1]]
 		Fields[["MonthPpublish"]] <- x$PubmedData$History[[i]]$Month[[1]]
 		Fields[["DayPpublish"]] <- x$PubmedData$History[[i]]$Day[[1]]
@@ -160,7 +161,7 @@ if(length(pubmed_states) > 0){
 	}		
 
 	if(any(pubmed_states == "pubmed")){
-		i <- which(pubmed_states == "pubmed")
+		i <- which(pubmed_states == "pubmed")[1]
 		Fields[["YearPubmed"]] <- x$PubmedData$History[[i]]$Year[[1]]
 		Fields[["MonthPubmed"]] <- x$PubmedData$History[[i]]$Month[[1]]
 		Fields[["DayPubmed"]] <- x$PubmedData$History[[i]]$Day[[1]]
