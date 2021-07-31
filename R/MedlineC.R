@@ -32,6 +32,10 @@ setMethod("c","Medline", function(x, ...){
 	Authors <- list()
 	for(x in GetComponents)
 		Authors <- c(Authors, x[["Author"]])
+		
+	Editors <- list()
+	for(x in GetComponents)
+		Editors <- c(Editors, x[["BookEditors"]])		
 
 	Affilitations <- list()
 	for(x in GetComponents)
@@ -127,7 +131,14 @@ setMethod("c","Medline", function(x, ...){
 	COIStatement = unlist(lapply(GetComponents, function(x) x[["COIStatement"]])),	
             Mesh = MeshTerms,
             Keywords = Keywords,
-            Citations = Citations
+            Citations = Citations,
+            	BookPublisher  = unlist(lapply(GetComponents, function(x) x[["BookPublisher"]])),
+    		BookPublisherLocation = unlist(lapply(GetComponents, function(x) x[["BookPublisherLocation"]])),
+    		BookTitle =  unlist(lapply(GetComponents, function(x) x[["BookTitle"]])),
+    		BookBeginningDate  = unlist(lapply(GetComponents, function(x) x[["BookBeginningDate"]])),
+    		BookEndingDate  = unlist(lapply(GetComponents, function(x) x[["BookEndingDate"]])),
+    		BookMedium  = unlist(lapply(GetComponents, function(x) x[["BookMedium"]])),
+    		BookEditors = Editors    
 	)
 	
 })

@@ -80,3 +80,13 @@ setGeneric("COIStatement",function(object) standardGeneric("COIStatement"))
 setGeneric("Mesh", function(object) standardGeneric("Mesh"))
 setGeneric("Keywords",  function(object) standardGeneric("Keywords"))
 setGeneric("Citations",  function(object) standardGeneric("Citations"))
+
+setGeneric("BookPublisher",function(object) standardGeneric("BookPublisher")) 
+setGeneric("BookPublisherLocation",function(object) standardGeneric("BookPublisherLocation")) 
+setGeneric("BookTitle",function(object) standardGeneric("BookTitle")) 
+setGeneric("BookBeginningDate",function(object) standardGeneric("BookBeginningDate")) 
+setGeneric("BookEndingDate",function(object) standardGeneric("BookEndingDate")) 
+setGeneric("BookEditors",function(object) standardGeneric("BookEditors")) 
+setGeneric("BookMedium",function(object) standardGeneric("BookMedium")) 
+
+   

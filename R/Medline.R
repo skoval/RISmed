@@ -90,7 +90,15 @@ setClass("Medline",
 			COIStatement = "character",
             Mesh="list",
             Keywords="list",
-            Citations="list")
+            Citations="list",
+            BookPublisher= "character",
+            BookPublisherLocation= "character",
+            BookTitle= "character",
+            BookBeginningDate= "numeric",
+            BookEndingDate= "numeric",
+            BookEditors= "list",
+            BookMedium = "character"
+            )
 )
 
 null_replace <- function(x) ifelse(is.null(x), NA, x)
@@ -215,6 +223,16 @@ Medline <- function(object, query = character(0)){
     names(Author) <- PMID
     names(Affiliation) <- PMID
     
+    BookPublisher <- sapply(object, function(x) null_replace(x[["BookPublisher"]]),USE.NAMES=FALSE)
+    BookPublisherLocation <- sapply(object, function(x) null_replace(x[["BookPublisherLocation"]]),USE.NAMES=FALSE)
+    BookTitle <- sapply(object, function(x) null_replace(x[["BookTitle"]]),USE.NAMES=FALSE)
+    BookBeginningDate <- sapply(object, function(x) null_replace(x[["BookBeginningDate"]]),USE.NAMES=FALSE)
+    BookEndingDate <- sapply(object, function(x) null_replace(x[["BookEndingDate"]]),USE.NAMES=FALSE)
+    BookMedium <- sapply(object, function(x) null_replace(x[["BookMedium"]]),USE.NAMES=FALSE)
+  
+    Editors <- lapply(object, function(x) list_null_replace(x[["BookEditors"]]))
+    names(Editors) <- PMID
+    
 	ISSN <- sapply(object, function(x) null_replace(x[["ISSN"]]),USE.NAMES=FALSE)
 	Title <- sapply(object, function(x) null_replace(x[["Title"]]),USE.NAMES=FALSE)
 	ArticleTitle <- sapply(object, function(x) null_replace(x[["ArticleTitle"]]),USE.NAMES=FALSE)
@@ -325,7 +343,13 @@ Medline <- function(object, query = character(0)){
 	Country <- as.character(Country)
 	GrantID <- GrantID
 	COIStatement <- as.character(COIStatement)
-
+    
+    BookPublisher <- as.character(BookPublisher)
+    BookPublisherLocation <- as.character(BookPublisherLocation) 
+    BookTitle <-  as.character(BookTitle) 
+    BookBeginningDate <- as.numeric(BookBeginningDate)
+    BookEndingDate <- as.numeric(BookEndingDate)
+    BookMedium <- as.character(BookMedium)
   	
 	new("Medline",
 			Query = query,
@@ -404,7 +428,14 @@ Medline <- function(object, query = character(0)){
 			COIStatement = COIStatement,
             Mesh = Mesh,
             Keywords = Keywords,
-            Citations = Citations
+            Citations = Citations,
+		    BookPublisher  = BookPublisher,
+    		BookPublisherLocation = BookPublisherLocation,
+    		BookTitle =  BookTitle,
+    		BookBeginningDate  = BookBeginningDate,
+    		BookEndingDate  = BookEndingDate,
+    		BookMedium  = BookMedium,
+    		BookEditors = Editors           
 	)
 }
 
@@ -496,4 +527,10 @@ setMethod("COIStatement","Medline",function(object) object@COIStatement)
 setMethod("Mesh","Medline",function(object) object@Mesh)
 setMethod("Keywords","Medline",function(object) object@Keywords)
 setMethod("Citations","Medline",function(object) object@Citations)
-
+setMethod("BookPublisher", "Medline", function(object) object@BookPublisher)
+setMethod("BookPublisherLocation", "Medline", function(object) object@BookLocation)
+setMethod("BookTitle", "Medline", function(object) object@BookTitle)
+setMethod("BookBeginningDate", "Medline", function(object) object@BookBeginningDate)
+setMethod("BookEndingDate", "Medline", function(object) object@BookEndingDate)
+setMethod("BookMedium", "Medline", function(object) object@BookMedium)
+setMethod("BookEditors", "Medline", function(object) object@BookEditors)

@@ -176,7 +176,14 @@ Objects can be created by calls of the form \code{new("Medline", ...)}.
 \item{COIStatement}{\code{signature(object = "Medline")}: ...}
 \item{Mesh}{\code{signature(object = "Medline")}: ...}   
 \item{Keywords}{\code{signature(object = "Medline")}: ...}   
-\item{Affiliations}{\code{signature(object = "Medline")}: ...}   
+\item{Affiliations}{\code{signature(object = "Medline")}: ...}
+\item{BookPublisher}{\code{signature(object = "Medline")}: ...} 
+\item{BookPublisherLocation}{\code{signature(object = "Medline")}: ...} 
+\item{BookTitle}{\code{signature(object = "Medline")}: ...} 
+\item{BookBeginningDate}{\code{signature(object = "Medline")}: ...} 
+\item{BookEndingDate}{\code{signature(object = "Medline")}: ...}
+\item{BookEditors}{\code{signature(object = "Medline")}: ...}
+\item{BookMedium}{\code{signature(object = "Medline")}: ...}
   }
 }
 
