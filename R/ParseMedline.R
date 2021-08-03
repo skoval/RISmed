@@ -252,7 +252,8 @@ if(!is.null(x$MedlineCitation$Article$Abstract)){
 }
 
 Fields[["Language"]] <- x$MedlineCitation$Article$Language[[1]]
-Fields[["PublicationType"]] <- x$MedlineCitation$Article$PublicationTypeList$PublicationType[[1]]
+if(!is.null(x$MedlineCitation$Article$PublicationTypeList))
+	Fields[["PublicationType"]] <- unlist(x$MedlineCitation$Article$PublicationTypeList[names(x$MedlineCitation$Article$PublicationTypeList) == "PublicationType"])
 Fields[["Country"]] <- x$MedlineCitation$MedlineJournalInfo$Country[[1]]
 Fields[["MedlineTA"]] <- x$MedlineCitation$MedlineJournalInfo$MedlineTA[[1]]
 Fields[["NlmUniqueID"]] <- x$MedlineCitation$MedlineJournalInfo$NlmUniqueID[[1]]
@@ -580,7 +581,7 @@ if(!is.null(x$BookDocument$Abstract)){
 }
 
 Fields[["Language"]] <- x$BookDocument$Language[[1]]
-Fields[["PublicationType"]] <- x$BookDocument$PublicationType[[1]]
+Fields[["PublicationType"]] <- x$BookDocument$Book$PublicationType[[1]]
 Fields[["Country"]] <- x$BookDocument$Article$Country[[1]]
 Fields[["MedlineTA"]] <- x$BookDocument$Article$MedlineTA[[1]]
 Fields[["NlmUniqueID"]] <- x$BookDocument$Article$NlmUniqueID[[1]]

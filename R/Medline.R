@@ -73,7 +73,7 @@ setClass("Medline",
 			AbstractText= "character",
 			Affiliation= "list",
 			Language= "character",
-			PublicationType= "character",
+			PublicationType= "list",
 			MedlineTA= "character",
 			NlmUniqueID= "character",
 			ISSNLinking= "character",
@@ -238,7 +238,7 @@ Medline <- function(object, query = character(0)){
 	ArticleTitle <- sapply(object, function(x) null_replace(x[["ArticleTitle"]]),USE.NAMES=FALSE)
 	ELocationID <- sapply(object, function(x) null_replace(x[["ELocationID"]]),USE.NAMES=FALSE)
 	Language <- sapply(object, function(x) null_replace(x[["Language"]]),USE.NAMES=FALSE)
-	PublicationType <- sapply(object, function(x) null_replace(x[["PublicationType"]]),USE.NAMES=FALSE)
+	PublicationType <- lapply(object, function(x) list_null_replace(x[["PublicationType"]]))
 	MedlineTA <- sapply(object, function(x) null_replace(x[["MedlineTA"]]),USE.NAMES=FALSE)
 	NlmUniqueID <- sapply(object, function(x) null_replace(x[["NlmUniqueID"]]),USE.NAMES=FALSE)
 	ISSNLinking <- sapply(object, function(x) null_replace(x[["ISSNLinking"]]),USE.NAMES=FALSE)
@@ -262,6 +262,7 @@ Medline <- function(object, query = character(0)){
 	names(Mesh) <- PMID	
 	names(Keywords) <- PMID
 	names(Citations) <- PMID
+	names(PublicationType) <- PMID
 
 	PMID <- as.character(PMID)
 	
@@ -328,7 +329,7 @@ Medline <- function(object, query = character(0)){
 	AbstractText <- as.character(AbstractText)
 	Affiliation <- Affiliation
 	Language <- as.character(Language)
-	PublicationType <- as.character(PublicationType)
+	PublicationType <- PublicationType
 	MedlineTA <- as.character(MedlineTA)
 	NlmUniqueID <- as.character(NlmUniqueID)
 	ISSNLinking <- as.character(ISSNLinking)

@@ -53,6 +53,10 @@ setMethod("c","Medline", function(x, ...){
 	for(x in GetComponents)
 		GrantID <- c(GrantID, x[["GrantID"]])		
 
+	PublicationType <- list()
+	for(x in PublicationType)
+		PublicationType <- c(PublicationType, x[["PublicationType"]])		
+
 		
 	new("Medline",
 			Query = sapply(GetComponents, function(x) x[["Query"]]),
@@ -114,7 +118,7 @@ setMethod("c","Medline", function(x, ...){
 			AbstractText = unlist(lapply(GetComponents, function(x) x[["AbstractText"]])),
 			Affiliation = Affilitations,
 			Language = unlist(lapply(GetComponents, function(x) x[["Language"]])),
-			PublicationType =  unlist(lapply(GetComponents, function(x) x[["PublicationType"]])),
+			PublicationType =  PublicationType,
 			MedlineTA = unlist(lapply(GetComponents, function(x) x[["MedlineTA"]])),
 			NlmUniqueID = unlist(lapply(GetComponents, function(x) x[["NlmUniqueID"]])),
 			ISSNLinking = unlist(lapply(GetComponents, function(x) x[["ISSNLinking"]])),
