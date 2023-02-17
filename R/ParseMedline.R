@@ -1,8 +1,12 @@
 ParseMedline <- function(x){
-	if(names(x)[[1]] == "BookDocument")
-		ParseMedlineBook(x)
-	else
-		ParseMedlineArticle(x)
+  if(all(x == "\n")){
+    NULL
+  } else {
+  	if(names(x)[[1]] == "BookDocument")
+  		ParseMedlineBook(x)
+  	else
+  		ParseMedlineArticle(x)
+  }
 }
 
 ParseMedlineArticle <- function(x){
