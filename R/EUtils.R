@@ -125,11 +125,11 @@ EUtilsSubGet <- function(ids, type="efetch", db="pubmed"){
 
 	FetchURL <- EUtilsURL(type,db=db)
 	IDStr <- collapse("id=",paste(ids,collapse=","))
-	EUtilsFetch <- collapse(FetchURL,IDStr)	
-	
-	res <- readLines(collapse(EUtilsFetch,"&retmode=xml"), warn = FALSE, encoding = "UTF-8")	
-	res <- readLines(collapse(EUtilsFetch,"&retmode=xml"), warn = FALSE, encoding = "UTF-8")
-	res <- xml2::read_xml(collapse(EUtilsFetch,"&retmode=xml"), encoding = "UTF-8")	
+	EUtilsFetch <- collapse(FetchURL,IDStr)
+
+	# res <- readLines(collapse(EUtilsFetch,"&retmode=xml"), warn = FALSE, encoding = "UTF-8")
+	# res <- readLines(collapse(EUtilsFetch,"&retmode=xml"), warn = FALSE, encoding = "UTF-8")
+	res <- xml2::read_xml(collapse(EUtilsFetch,"&retmode=xml"), encoding = "UTF-8")
 	res <- xml2::as_list(res)[[1]]
 	
 	if(db == "pubmed"){
