@@ -35,7 +35,7 @@ EUtilsQuery <- function(query,type="esearch",db="pubmed",...){
 	}
 	else{
 		WhichArgs <- pmatch(names(ArgList),OPTIONS)	
-		if(any(is.na(WhichArgs))||sapply(WhichArgs,length)>1)
+		if(any(is.na(WhichArgs))||any(sapply(WhichArgs,length)>1))
 			stop("Error in specified limits.")
 		names(ArgList) <- OPTIONS[WhichArgs]
 		if(all(names(ArgList)!="retmax"))
